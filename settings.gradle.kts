@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "KMMTestApp"
 include(":androidApp")
 include(":shared")
+include(":toolkit")
