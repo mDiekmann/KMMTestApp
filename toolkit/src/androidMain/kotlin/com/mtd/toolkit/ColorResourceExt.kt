@@ -5,6 +5,6 @@ import dev.icerock.moko.resources.ColorResource
 
 actual typealias PlatformColor = Color
 
-actual fun ColorResource.Single.toPlatormColor(): PlatformColor {
+actual fun ColorResource.Single.toPlatformColor(): PlatformColor {
     return Color.valueOf(Color.BLUE)
 }

@@ -5,7 +5,7 @@ import dev.icerock.moko.resources.ColorResource
 
 actual typealias PlatformColor: UIColor
 
-actual fun ColorResource.Single.toPlatormColor(): PlatformColor {
+actual fun ColorResource.Single.toPlatformColor(): PlatformColor {
     return UIColor.blueColor
 }
 
