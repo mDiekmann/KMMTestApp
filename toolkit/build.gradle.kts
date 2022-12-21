@@ -32,8 +32,15 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
-        val androidTest by getting
+        val androidMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                implementation("androidx.compose.ui:ui:1.2.1")
+            }
+        }
+        val androidTest by getting {
+            dependsOn(commonTest)
+        }
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
