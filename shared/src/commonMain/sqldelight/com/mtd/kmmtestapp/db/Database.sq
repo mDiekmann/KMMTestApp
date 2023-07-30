@@ -1,0 +1,17 @@
+CREATE TABLE DiceRoll (
+    input TEXT NOT NULL,
+    result INTEGER NOT NULL,
+    details TEXT NOT NULL,
+    rollTimeUTC TEXT NOT NULL
+);
+
+insertDiceRoll:
+INSERT INTO DiceRoll(input, result, details, rollTimeUTC)
+VALUES(?, ?, ?, ?);
+
+removeAllDiceRolls:
+DELETE FROM DiceRoll;
+
+selectAllDiceRolls:
+SELECT DiceRoll.*
+FROM DiceRoll;
