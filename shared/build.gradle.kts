@@ -1,13 +1,8 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("app.cash.sqldelight") version "2.0.0"
+    id("app.cash.sqldelight")
 }
-
-val coroutinesVersion = "1.7.1"
-val ktorVersion = "2.3.2"
-val sqlDelightVersion = "2.0.0"
-val dateTimeVersion = "0.4.0"
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
@@ -34,40 +29,53 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$dateTimeVersion")
+                implementation(libs.koin.core)
+                implementation(libs.bundles.ktor.common)
+                implementation(libs.coroutines.core)
+                implementation(libs.kotlinx.dateTime)
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.bundles.shared.commonTest)
             }
         }
 
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.android)
+                implementation(libs.sqlDelight.android)
+            }
+        }
+
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(libs.sqlDelight.jvm)
             }
         }
 
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
-                implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.darwin)
+                implementation(libs.sqlDelight.native)
             }
+        }
+
+        val iosTest by getting
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Test by getting {
+            dependsOn(iosTest)
         }
     }
 }
 
 android {
     namespace = "com.mtd.kmmtestapp"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.minSdk.get().toInt()
     }
 }
 
