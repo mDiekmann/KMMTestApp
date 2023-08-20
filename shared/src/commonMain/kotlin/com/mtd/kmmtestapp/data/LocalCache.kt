@@ -1,37 +1,53 @@
 package com.mtd.kmmtestapp.data
 
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.db.SqlDriver
+import com.mtd.kmmtestapp.db.Database
 import com.mtd.kmmtestapp.entities.DiceRoll
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
-internal class LocalCache(databaseDriverFactory: DriverFactory) {
-    private val database = com.mtd.kmmtestapp.db.Database(databaseDriverFactory.createDriver())
+internal class LocalCache(
+    sqlDriver: SqlDriver,
+    private val backgroundDispatcher: CoroutineDispatcher
+) {
+    private val database = Database(sqlDriver)
     private val dbQuery = database.databaseQueries
 
-    internal fun clearDatabase() {
-        dbQuery.transaction {
+    suspend internal fun clearDatabase() {
+        dbQuery.transactionWithContext(backgroundDispatcher) {
             dbQuery.removeAllDiceRolls()
         }
     }
 
-    internal fun getAllDiceRolls(): List<DiceRoll> {
-        return dbQuery.selectAllDiceRolls(::mapDiceRollSelection).executeAsList()
+    internal fun getAllDiceRolls(): Flow<List<DiceRoll>> {
+        return dbQuery
+            .selectAllDiceRolls(::mapDiceRollSelection)
+            .asFlow()
+            .mapToList(Dispatchers.Default)
+            .flowOn(backgroundDispatcher)
     }
 
+    /// Map from DB entity to data model
     private fun mapDiceRollSelection(
         input: String,
         result: Long,
         details: String,
-        rollTimeUTC: String
+        rollTimeEpoch: Long
     ): DiceRoll {
         return DiceRoll(
             input = input,
             result = result.toInt(),
             details = details,
-            rollTimeUTC = rollTimeUTC
+            rollTimeEpoch = rollTimeEpoch
         )
     }
 
-    internal fun insertDiceRolls(diceRolls: List<DiceRoll>) {
-        dbQuery.transaction {
+    suspend internal fun insertDiceRolls(diceRolls: List<DiceRoll>) {
+        dbQuery.transactionWithContext(backgroundDispatcher) {
             diceRolls.forEach { diceRoll ->
                 insertDiceRoll(diceRoll)
             }
@@ -43,7 +59,7 @@ internal class LocalCache(databaseDriverFactory: DriverFactory) {
             input = diceRoll.input,
             result = diceRoll.result.toLong(),
             details = diceRoll.details,
-            rollTimeUTC = diceRoll.rollTimeUTC
+            rollTimeEpoch = diceRoll.rollTimeEpoch
         )
     }
 }

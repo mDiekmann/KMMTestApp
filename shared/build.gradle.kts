@@ -31,6 +31,7 @@ kotlin {
             dependencies {
                 implementation(libs.koin.core)
                 implementation(libs.bundles.ktor.common)
+                implementation(libs.sqlDelight.coroutinesExt)
                 implementation(libs.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
             }

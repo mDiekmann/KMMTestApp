@@ -1,10 +1,10 @@
 package com.mtd.kmmtestapp.entities
 
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerialName
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class DiceRoll(
@@ -15,9 +15,10 @@ data class DiceRoll(
     @SerialName("details")
     val details: String,
     @SerialName("timestamp")
-    val rollTimeUTC: String
+    val rollTimeEpoch: Long
 ) {
-    var rollTime = rollTimeUTC.toInstant().toLocalDateTime(TimeZone.UTC)
+    val instant = Instant.fromEpochMilliseconds(rollTimeEpoch)
+    var rollTime = instant.toLocalDateTime(TimeZone.UTC)
 }
 
 /*
