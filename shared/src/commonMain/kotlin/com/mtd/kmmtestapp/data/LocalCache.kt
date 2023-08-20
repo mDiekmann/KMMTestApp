@@ -4,7 +4,7 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import com.mtd.kmmtestapp.db.Database
-import com.mtd.kmmtestapp.entities.DiceRoll
+import com.mtd.kmmtestapp.model.DiceRoll
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
