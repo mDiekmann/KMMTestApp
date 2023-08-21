@@ -27,11 +27,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        initKoin {
+        initKoin (
             module {
 
             }
-        }
+        )
     }
 }
 
