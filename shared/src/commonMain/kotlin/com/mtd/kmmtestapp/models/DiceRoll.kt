@@ -1,4 +1,4 @@
-package com.mtd.kmmtestapp.model
+package com.mtd.kmmtestapp.models
 
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone

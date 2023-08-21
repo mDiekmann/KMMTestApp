@@ -41,4 +41,5 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(libs.bundles.app.ui)
+    implementation(libs.koin.android)
 }

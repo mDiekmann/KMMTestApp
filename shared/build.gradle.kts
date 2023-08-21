@@ -35,6 +35,7 @@ kotlin {
                 implementation(libs.sqlDelight.coroutinesExt)
                 implementation(libs.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
+                implementation(libs.touchlab.kermit)
             }
         }
         val commonTest by getting {

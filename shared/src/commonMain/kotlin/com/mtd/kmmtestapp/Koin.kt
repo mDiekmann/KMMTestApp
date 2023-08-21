@@ -2,22 +2,25 @@ package com.mtd.kmmtestapp
 
 import com.mtd.kmmtestapp.data.LocalCache
 import kotlinx.coroutines.Dispatchers
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
-import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
-    startKoin {
-        appDeclaration()
+fun initKoin(appModule: Module): KoinApplication {
+    val koinApplication = startKoin {
         modules(
-            coreModule
+            appModule,
+            databaseModule,
+            apiModule
         )
     }
+
+    return koinApplication
 }
 
-private val coreModule = module {
-    single{
+private val databaseModule = module {
+    single {
         LocalCache(
             get(),
             Dispatchers.Default
@@ -25,6 +28,14 @@ private val coreModule = module {
     }
 }
 
-fun initKoin() = initKoin {}
+private val apiModule = module {
+    single {
+        LocalCache(
+            get(),
+            Dispatchers.Default
+        )
+    }
+}
+
 
 expect val platformModule: Module

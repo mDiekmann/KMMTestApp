@@ -4,16 +4,18 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import com.mtd.kmmtestapp.db.Database
-import com.mtd.kmmtestapp.model.DiceRoll
+import com.mtd.kmmtestapp.models.DiceRoll
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
+import org.koin.core.component.KoinComponent
+
 internal class LocalCache(
     sqlDriver: SqlDriver,
     private val backgroundDispatcher: CoroutineDispatcher
-) {
+) : KoinComponent {
     private val database = Database(sqlDriver)
     private val dbQuery = database.databaseQueries
 

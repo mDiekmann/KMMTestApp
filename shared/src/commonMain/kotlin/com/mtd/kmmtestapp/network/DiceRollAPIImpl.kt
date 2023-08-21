@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp.network
 
-import com.mtd.kmmtestapp.model.DiceRoll
+import com.mtd.kmmtestapp.models.DiceRoll
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
@@ -11,8 +11,9 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import org.koin.core.component.KoinComponent
 
-class DiceRollAPIImpl(private val engine: HttpClientEngine) : DiceRollAPI {
+class DiceRollAPIImpl(private val engine: HttpClientEngine) : KoinComponent, DiceRollAPI {
 
     private val client = HttpClient(engine) {
         expectSuccess = true
