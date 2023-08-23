@@ -9,6 +9,7 @@ compileSdk = "33"
 # Dependencies
 android-gradle-plugin = "8.0.0"
 androidx-activity-compose = "1.7.1"
+androidx-lifecycle = "2.6.1"
 compose = "1.4.3"
 composeCompiler = "1.4.8"
 coroutines = "1.7.1"
@@ -19,6 +20,8 @@ ktor = "2.3.2"
 sqlDelight = "2.0.0"
 
 [libraries]
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
@@ -27,9 +30,6 @@ compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "co
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
-
-touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
-touchlab-kermit-simple = { module = "co.touchlab:kermit-simple", version.ref = "kermit" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
@@ -49,6 +49,9 @@ sqlDelight-android = { module = "app.cash.sqldelight:android-driver", version.re
 sqlDelight-jvm = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqlDelight-coroutinesExt = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+
+touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+touchlab-kermit-simple = { module = "co.touchlab:kermit-simple", version.ref = "kermit" }
 
 [bundles]
 app-ui = [

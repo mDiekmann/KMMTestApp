@@ -12,10 +12,12 @@ class DiceRollRepository : KoinComponent {
 
     fun getDiceRolls(): Flow<List<DiceRoll>> = localCache.getAllDiceRolls()
 
-    suspend fun rollDice(diceCount: Int, diceSides: Int) {
+    suspend fun rollDice(diceCount: Int, diceSides: Int): DiceRoll {
         val diceRoll = diceRollAPI.rollDice(diceCount, diceSides)
 
         localCache.insertDiceRoll(diceRoll)
+
+        return diceRoll
     }
 
     suspend fun clearLocalCache() = localCache.clearDatabase()
