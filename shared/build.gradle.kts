@@ -3,6 +3,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("app.cash.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -24,6 +25,8 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            export(libs.moko.resources.core)
+            export(libs.moko.graphics.core) // contains toUIColor helper function
         }
     }
 
@@ -36,6 +39,8 @@ kotlin {
                 implementation(libs.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
+                api(libs.moko.resources.core)
+                api(libs.moko.resources.compose)
             }
         }
         val commonTest by getting {
@@ -89,4 +94,9 @@ sqldelight {
             packageName.set("com.mtd.kmmtestapp.db")
         }
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.mtd.kmmtestapp.res" // required
+    multiplatformResourcesClassName = "SharedRes" // optional, default MR
 }

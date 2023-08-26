@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="newRollTitle">Roll New Die</string>
+    <string name="diceCount">Count</string>
+    <string name="diceSides">Sides</string>
+    <string name="result">Result</string>
+
+    <string name="newRollLabel">Roll New</string>
+</resources>
