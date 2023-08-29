@@ -1,7 +1,44 @@
 package com.mtd.kmmtestapp.network
 
+import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.models.DiceRoll
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.get
+import io.ktor.http.URLProtocol
+import io.ktor.http.path
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
-interface DiceRollAPI {
-    suspend fun rollDice(diceCount: Int, diceSides: Int): DiceRoll
+class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
+
+    val logger = Logger.withTag("DiceRollAPIImpl")
+
+    private val client = HttpClient(engine) {
+        expectSuccess = true
+        install(ContentNegotiation) {
+            json(Json { isLenient = true; ignoreUnknownKeys = true })
+        }
+
+        install(HttpTimeout) {
+            val timeout = 30000L
+            connectTimeoutMillis = timeout
+            requestTimeoutMillis = timeout
+            socketTimeoutMillis = timeout
+        }
+    }
+    override suspend fun rollDice(diceCount: Int, diceSides: Int): DiceRoll {
+        logger.v { "rollDice($diceCount,$diceSides)" }
+        return client.get{
+            url {
+                protocol = URLProtocol.HTTPS
+                host = "rolz.org"
+                path("api/")
+                parameters.run { append("", "${diceCount}d$diceSides.json") }
+            }
+        }.body()
+    }
 }

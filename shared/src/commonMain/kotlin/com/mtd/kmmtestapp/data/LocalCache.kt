@@ -3,6 +3,7 @@ package com.mtd.kmmtestapp.data
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
+import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.db.Database
 import com.mtd.kmmtestapp.models.DiceRoll
 import kotlinx.coroutines.CoroutineDispatcher
@@ -10,14 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
-import org.koin.core.component.KoinComponent
-
 internal class LocalCache(
     sqlDriver: SqlDriver,
     private val backgroundDispatcher: CoroutineDispatcher
-) : KoinComponent {
+) {
     private val database = Database(sqlDriver)
     private val dbQuery = database.databaseQueries
+    private val logger = Logger.withTag("LocalCache")
 
     suspend internal fun clearDatabase() {
         dbQuery.transactionWithContext(backgroundDispatcher) {
@@ -57,6 +57,7 @@ internal class LocalCache(
     }
 
     internal fun insertDiceRoll(diceRoll: DiceRoll) {
+        logger.v { "Storing $diceRoll" }
         dbQuery.insertDiceRoll(
             input = diceRoll.input,
             result = diceRoll.result.toLong(),

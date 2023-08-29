@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp
 
-import com.mtd.kmmtestapp.network.DiceRollAPIImpl
+import com.mtd.kmmtestapp.network.DiceRollAPI
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.ClientRequestException
@@ -24,7 +24,7 @@ class DiceRollAPITest {
                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             )
         }
-        val api = DiceRollAPIImpl(engine)
+        val api = DiceRollAPI(engine)
         val result = api.rollDice(10, 12)
         assertTrue { result.input == "10d12" }
     }
@@ -37,7 +37,7 @@ class DiceRollAPITest {
                 status = HttpStatusCode.NotFound
             )
         }
-        val api = DiceRollAPIImpl(engine)
+        val api = DiceRollAPI(engine)
         assertFailsWith<ClientRequestException> {
             api.rollDice(10, 4)
         }

@@ -1,7 +1,7 @@
 package com.mtd.kmmtestapp.viewModels
 
 import com.mtd.kmmtestapp.models.DiceRoll
-import com.mtd.kmmtestapp.models.DiceRollRepository
+import com.mtd.kmmtestapp.repository.DiceRollRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

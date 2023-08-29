@@ -42,4 +42,6 @@ dependencies {
     implementation(project(":shared"))
     implementation(libs.bundles.app.ui)
     implementation(libs.koin.android)
+    implementation(libs.chargemap.compose.numberpicker)
+    testImplementation("org.testng:testng:6.9.6")
 }

@@ -67,6 +67,7 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 touchlab-kermit-simple = { module = "co.touchlab:kermit-simple", version.ref = "kermit" }
+protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version = "18.0.0" }
 
 [bundles]
 app-ui = [
