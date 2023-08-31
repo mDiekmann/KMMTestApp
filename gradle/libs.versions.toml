@@ -1,5 +1,5 @@
 [versions]
-kotlin = "1.8.22"
+kotlin = "1.9.0"
 
 ## SDK Versions
 minSdk = "24"
@@ -22,6 +22,7 @@ moko-graphics = "0.9.0"
 moko-resources = "0.23.0"
 numberpicker = "1.0.3"
 sqlDelight = "2.0.0"
+viewmodel-compose = "2.6.1"
 
 
 [libraries]
@@ -34,6 +35,7 @@ compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel-compose" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation-compose" }
 
@@ -67,7 +69,6 @@ sqlDelight-native = { module = "app.cash.sqldelight:native-driver", version.ref 
 
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 touchlab-kermit-simple = { module = "co.touchlab:kermit-simple", version.ref = "kermit" }
-protolite-well-known-types = { group = "com.google.firebase", name = "protolite-well-known-types", version = "18.0.0" }
 
 [bundles]
 app-ui = [
@@ -76,7 +77,8 @@ app-ui = [
     "compose-foundation",
     "compose-material",
     "compose-activity",
-    "compose-navigation"
+    "compose-navigation",
+    "compose-viewmodel"
 ]
 ktor-common = [
     "ktor-client-core",

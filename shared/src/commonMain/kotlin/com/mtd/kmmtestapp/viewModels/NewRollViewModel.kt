@@ -13,8 +13,8 @@ class NewRollViewModel : CoroutineViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
     val logger = Logger.withTag("NewRollViewModel")
 
-    private val _viewState = MutableStateFlow<NewRollViewState?>(null)
-    val viewState: StateFlow<NewRollViewState?>
+    private val _viewState = MutableStateFlow<NewRollViewState>(NewRollViewState(latestRoll = null))
+    val viewState: StateFlow<NewRollViewState>
         get() = _viewState
 
     val minDiceCount = 1
@@ -24,17 +24,35 @@ class NewRollViewModel : CoroutineViewModel(), KoinComponent {
     fun rollDice(diceCount: Int, diceSides: Int) {
         logger.d { "rollDice($diceCount, $diceSides)" }
         coroutineScope.launch {
-            _viewState.value = NewRollViewState(isLoading = true)
+            setLoadingState(isLoading = true)
             try {
                 val newRoll = diceRollRepo.rollDice(diceCount, diceSides)
+                // s
                 _viewState.value = NewRollViewState(latestRoll = newRoll)
             } catch (e: Exception) {
                 logger.e(e) { "Exception during rollDice: $e" }
-                _viewState.value = NewRollViewState(error = "Error creating new roll")
+                setErrorState("Error creating new roll")
             }
         }
     }
+
+    private fun setLoadingState(isLoading: Boolean) {
+        _viewState.value = _viewState.value.copy(isLoading= isLoading)
+    }
+
+    private fun setErrorState(error: String?) {
+        _viewState.value = _viewState.value.copy(isLoading= false, error = error)
+    }
 }
+
+/*
+using an all encompassing versus individual values has it's trade offs
+
+on the plus side setting latest roll or error will reset isLoading automatically
+
+on the negative side if special setters aren't created for a given state that uses copy()
+individual states can be cleared out as a side effect
+ */
 
 data class NewRollViewState(
     val latestRoll: DiceRoll? = null,

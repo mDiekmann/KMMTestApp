@@ -6,7 +6,7 @@ import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-@Serializable
+@Serializable(with = DiceRollSerializer::class)
 data class DiceRoll(
     @SerialName("input")
     val input: String,
@@ -17,13 +17,19 @@ data class DiceRoll(
     @SerialName("timestamp")
     val rollTimeEpoch: Long
 ) {
-    val instant = Instant.fromEpochMilliseconds(rollTimeEpoch)
-    var rollTime = instant.toLocalDateTime(TimeZone.UTC)
+    val rollTime = Instant.fromEpochMilliseconds(rollTimeEpoch).toLocalDateTime(TimeZone.UTC)
+    val detailsAsIntArray = details
+        .filter { it.isDigit() || it.isWhitespace() }
+        .trim()
+        .split("\\s".toRegex())
+        .map {
+            it.toInt()
+        }
 }
 
 /*
 {
-    "input":"10d12",
+    "input":"=10d12",
     "result":61,
     "details":" (5 +9 +12 +4 +7 +2 +4 +9 +7 +2) ",
     "code":"",

@@ -87,9 +87,6 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
     }
 }
-dependencies {
-    implementation(libs.protolite.well.known.types)
-}
 
 sqldelight {
     databases {

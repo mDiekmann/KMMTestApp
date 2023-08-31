@@ -1,4 +1,4 @@
-package com.mtd.kmmtestapp.android
+package com.mtd.kmmtestapp.android.common
 
 
 import androidx.annotation.StringRes
@@ -8,6 +8,7 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -19,6 +20,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.mtd.kmmtestapp.android.newroll.NewDiceRollScreen
+import com.mtd.kmmtestapp.android.rollhistory.RollHistoryScreen
 import com.mtd.kmmtestapp.res.SharedRes
 
 sealed class BottomNavigationScreens(val route: String, @StringRes val stringRes: Int, val imageRes: Int) {
@@ -35,11 +38,6 @@ sealed class BottomNavigationScreens(val route: String, @StringRes val stringRes
 }
 
 @Composable
-fun SearchScreen() {
-    // Your Search screen content here
-}
-
-@Composable
 fun AppNavigation(navController: NavHostController,
                   paddingModifier: Modifier) {
     NavHost(navController,
@@ -51,7 +49,7 @@ fun AppNavigation(navController: NavHostController,
         }
         composable(route = BottomNavigationScreens.RollHistory.route)
         {
-            SearchScreen()
+            RollHistoryScreen()
         }
     }
 }
@@ -73,9 +71,25 @@ private fun BottomBarNavigation(
                         modifier = Modifier.fillMaxSize(0.5F)
                     )
                 },
-                label = { label },
+                label = { Text(text = label) },
                 selected = navItem.route == backStackEntry.value?.destination?.route,
-                onClick = { navController.navigate(navItem.route) },
+                onClick = {
+                    navController.navigate(navItem.route) {
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        navController.graph.startDestinationRoute?.let { route ->
+                            popUpTo(route) {
+                                saveState = true
+                            }
+                        }
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
+                        restoreState = true
+                    }
+                          },
             )
         }
     }
