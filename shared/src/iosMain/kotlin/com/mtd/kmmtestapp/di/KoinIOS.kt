@@ -5,16 +5,7 @@ import app.cash.sqldelight.driver.native.NativeSqliteDriver
 import com.mtd.kmmtestapp.db.Database
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
-import org.koin.core.KoinApplication
 import org.koin.dsl.module
-
-fun initKoinIos(
-
-): KoinApplication = initKoin(
-    module {
-
-    }
-)
 
 actual val platformModule = module {
     single<SqlDriver> {

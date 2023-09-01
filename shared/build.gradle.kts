@@ -40,7 +40,6 @@ kotlin {
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
                 api(libs.moko.resources.core)
-                api(libs.moko.resources.compose)
             }
         }
         val commonTest by getting {
@@ -54,6 +53,7 @@ kotlin {
                 implementation(libs.ktor.client.android)
                 implementation(libs.sqlDelight.android)
                 implementation(libs.androidx.lifecycle.viewmodel)
+                api(libs.moko.resources.compose)
             }
         }
 
