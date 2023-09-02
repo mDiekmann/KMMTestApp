@@ -2,7 +2,6 @@ package com.mtd.kmmtestapp.android.common
 
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -68,7 +67,6 @@ private fun BottomBarNavigation(
                     Icon(
                         painterResource(id = navItem.imageRes),
                         contentDescription = label,
-                        modifier = Modifier.fillMaxSize(0.5F)
                     )
                 },
                 label = { Text(text = label) },

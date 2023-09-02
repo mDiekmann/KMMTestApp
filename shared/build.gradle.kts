@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("app.cash.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
+    id("com.rickclephas.kmp.nativecoroutines")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -17,14 +18,14 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = "CommonKMM"
             export(libs.moko.resources.core)
             export(libs.moko.graphics.core) // contains toUIColor helper function
         }
@@ -40,6 +41,7 @@ kotlin {
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
                 api(libs.moko.resources.core)
+                api(libs.kmm.viewmodel.core)
             }
         }
         val commonTest by getting {
@@ -73,10 +75,23 @@ kotlin {
         val iosTest by getting
         val iosSimulatorArm64Main by getting {
             dependsOn(iosMain)
+            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
         }
         val iosSimulatorArm64Test by getting {
             dependsOn(iosTest)
         }
+
+        // temporary workaround for KSP breaking MoKo Resources: https://github.com/icerockdev/moko-resources/issues/531
+        val iosX64Main by getting {
+            resources.srcDirs("build/generated/moko/iosX64Main/src")
+        }
+        val iosArm64Main by getting {
+            resources.srcDirs("build/generated/moko/iosArm64Main/src")
+        }
+    }
+
+    sourceSets.all {
+        languageSettings.optIn("kotlin.experimental.ExperimentalObjCName")
     }
 }
 
@@ -99,4 +114,11 @@ sqldelight {
 multiplatformResources {
     multiplatformResourcesPackage = "com.mtd.kmmtestapp.res" // required
     multiplatformResourcesClassName = "SharedRes" // optional, default MR
+}
+
+// temporary workaround for KSP breaking MoKo Resources: https://github.com/icerockdev/moko-resources/issues/531
+android {
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
+    }
 }

@@ -3,17 +3,21 @@ package com.mtd.kmmtestapp.viewModels
 import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.models.DiceRoll
 import com.mtd.kmmtestapp.repository.DiceRollRepository
+import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmm.viewmodel.coroutineScope
+import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class NewRollViewModel : CoroutineViewModel(), KoinComponent {
+class NewRollViewModel : KMMViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
     val logger = Logger.withTag("NewRollViewModel")
 
     private val _viewState = MutableStateFlow<NewRollViewState>(NewRollViewState(latestRoll = null))
+    @NativeCoroutinesState
     val viewState: StateFlow<NewRollViewState>
         get() = _viewState
 
@@ -23,7 +27,8 @@ class NewRollViewModel : CoroutineViewModel(), KoinComponent {
 
     fun rollDice(diceCount: Int, diceSides: Int) {
         logger.d { "rollDice($diceCount, $diceSides)" }
-        coroutineScope.launch {
+
+        viewModelScope.coroutineScope.launch {
             setLoadingState(isLoading = true)
             try {
                 val newRoll = diceRollRepo.rollDice(diceCount, diceSides)

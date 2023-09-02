@@ -7,6 +7,8 @@ plugins {
     kotlin("multiplatform") version libs.versions.kotlin.get() apply false
     kotlin("plugin.serialization") version libs.versions.kotlin.get() apply false
     id("app.cash.sqldelight") version libs.versions.sqlDelight.get() apply false
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kmp.nativecoroutines)
 }
 
 tasks.register("clean", Delete::class) {

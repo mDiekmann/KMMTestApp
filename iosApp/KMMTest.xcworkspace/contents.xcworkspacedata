@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "Kotlin Debug">
+      <Group
+         location = "group:../shared/src/commonMain"
+         name = "commonMain">
+         <Group
+            location = "group:resources"
+            name = "resources">
+            <Group
+               location = "group:MR"
+               name = "MR">
+               <Group
+                  location = "group:images"
+                  name = "images">
+                  <FileRef
+                     location = "group:dice_icon.svg">
+                  </FileRef>
+                  <FileRef
+                     location = "group:list_icon.svg">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:colors"
+                  name = "colors">
+                  <FileRef
+                     location = "group:colors.xml">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:fonts"
+                  name = "fonts">
+                  <FileRef
+                     location = "group:Roboto-Medium.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Light.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Regular.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-MediumItalic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-ThinItalic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-BoldItalic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-LightItalic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Italic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:LICENSE.txt">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-BlackItalic.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Bold.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Thin.ttf">
+                  </FileRef>
+                  <FileRef
+                     location = "group:Roboto-Black.ttf">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:base"
+                  name = "base">
+                  <FileRef
+                     location = "group:strings-rollNewScreen.xml">
+                  </FileRef>
+                  <FileRef
+                     location = "group:strings-rollHistoryScreen.xml">
+                  </FileRef>
+               </Group>
+            </Group>
+         </Group>
+         <Group
+            location = "group:kotlin"
+            name = "kotlin">
+            <Group
+               location = "group:com"
+               name = "com">
+               <Group
+                  location = "group:mtd"
+                  name = "mtd">
+                  <Group
+                     location = "group:kmmtestapp"
+                     name = "kmmtestapp">
+                     <Group
+                        location = "group:viewModels"
+                        name = "viewModels">
+                        <FileRef
+                           location = "group:RollHistoryViewModel.kt">
+                        </FileRef>
+                        <FileRef
+                           location = "group:NewRollViewModel.kt">
+                        </FileRef>
+                        <FileRef
+                           location = "group:CoroutineViewModel.kt">
+                        </FileRef>
+                     </Group>
+                     <Group
+                        location = "group:repository"
+                        name = "repository">
+                        <FileRef
+                           location = "group:DiceRollRepository.kt">
+                        </FileRef>
+                     </Group>
+                     <Group
+                        location = "group:di"
+                        name = "di">
+                        <FileRef
+                           location = "group:Koin.kt">
+                        </FileRef>
+                     </Group>
+                     <FileRef
+                        location = "group:Platform.kt">
+                     </FileRef>
+                     <Group
+                        location = "group:network"
+                        name = "network">
+                        <FileRef
+                           location = "group:DiceRollAPI.kt">
+                        </FileRef>
+                        <FileRef
+                           location = "group:DiceRollAPIInterface.kt">
+                        </FileRef>
+                     </Group>
+                     <Group
+                        location = "group:models"
+                        name = "models">
+                        <FileRef
+                           location = "group:DiceRollSerializer.kt">
+                        </FileRef>
+                        <FileRef
+                           location = "group:DiceRoll.kt">
+                        </FileRef>
+                     </Group>
+                     <Group
+                        location = "group:data"
+                        name = "data">
+                        <FileRef
+                           location = "group:LocalCache.kt">
+                        </FileRef>
+                        <FileRef
+                           location = "group:CoroutinesExtension.kt">
+                        </FileRef>
+                     </Group>
+                     <FileRef
+                        location = "group:Greeting.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+            </Group>
+         </Group>
+         <Group
+            location = "group:sqldelight"
+            name = "sqldelight">
+            <Group
+               location = "group:com"
+               name = "com">
+               <Group
+                  location = "group:mtd"
+                  name = "mtd">
+                  <Group
+                     location = "group:kmmtestapp"
+                     name = "kmmtestapp">
+                     <Group
+                        location = "group:db"
+                        name = "db">
+                        <FileRef
+                           location = "group:Database.sq">
+                        </FileRef>
+                     </Group>
+                  </Group>
+               </Group>
+            </Group>
+         </Group>
+      </Group>
+      <Group
+         location = "group:../shared/src/iosMain"
+         name = "iosMain">
+         <Group
+            location = "group:kotlin"
+            name = "kotlin">
+            <Group
+               location = "group:com"
+               name = "com">
+               <Group
+                  location = "group:mtd"
+                  name = "mtd">
+                  <Group
+                     location = "group:kmmtestapp"
+                     name = "kmmtestapp">
+                     <Group
+                        location = "group:viewModels"
+                        name = "viewModels">
+                        <FileRef
+                           location = "group:CoroutineViewModel.kt">
+                        </FileRef>
+                     </Group>
+                     <Group
+                        location = "group:di"
+                        name = "di">
+                        <FileRef
+                           location = "group:KoinIOS.kt">
+                        </FileRef>
+                     </Group>
+                     <FileRef
+                        location = "group:Platform.ios.kt">
+                     </FileRef>
+                  </Group>
+               </Group>
+            </Group>
+         </Group>
+      </Group>
+   </Group>
+   <FileRef
+      location = "group:iosApp.xcodeproj">
+   </FileRef>
+</Workspace>

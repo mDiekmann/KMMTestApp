@@ -12,6 +12,7 @@ import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.encoding.decodeStructure
 import kotlinx.serialization.encoding.encodeStructure
 
+@OptIn(kotlinx.serialization.ExperimentalSerializationApi::class)
 @Serializer(forClass = DiceRoll::class)
 class DiceRollSerializer : KSerializer<DiceRoll> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DiceRoll") {
