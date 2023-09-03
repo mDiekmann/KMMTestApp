@@ -7,13 +7,33 @@
 //
 
 import SwiftUI
+import KMMViewModelSwiftUI
 import CommonKMM
 
 struct CreateNewRollView: View {
-    @ObservedObject var state: CommonKMM.NewRollViewModel
+    @ObservedViewModel var viewModel = NewRollViewModel()
+
+    var colors = ["Red", "Green", "Blue", "Tartan"]
+    @State private var selectedColor = "Red"
+    @State private var diceSides: Int32 = 6
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Picker("Please choose a color", selection: $selectedColor) {
+                    ForEach(colors, id: \.self) {
+                        Text($0)
+                    }
+                }
+                Text("d")
+                Picker("Your age", selection: $diceSides) {
+                    ForEach(viewModel.possibleDiceSides, id: \.self) { number in
+                        Text("\(number)")
+                    }
+                }
+            }
+            Text("You selected: \(diceSides)")
+        }
     }
 }
 

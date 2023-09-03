@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 
 class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
 
-    val logger = Logger.withTag("DiceRollAPIImpl")
+    private val logger = Logger.withTag("DiceRollAPIImpl")
 
     private val client = HttpClient(engine) {
         expectSuccess = true

@@ -19,7 +19,7 @@ internal class LocalCache(
     private val dbQuery = database.databaseQueries
     private val logger = Logger.withTag("LocalCache")
 
-    suspend internal fun clearDatabase() {
+    internal suspend fun clearDatabase() {
         dbQuery.transactionWithContext(backgroundDispatcher) {
             dbQuery.removeAllDiceRolls()
         }
@@ -48,7 +48,7 @@ internal class LocalCache(
         )
     }
 
-    suspend internal fun insertDiceRolls(diceRolls: List<DiceRoll>) {
+    internal suspend fun insertDiceRolls(diceRolls: List<DiceRoll>) {
         dbQuery.transactionWithContext(backgroundDispatcher) {
             diceRolls.forEach { diceRoll ->
                 insertDiceRoll(diceRoll)

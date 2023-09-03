@@ -4,22 +4,25 @@ import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.models.DiceRoll
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import com.rickclephas.kmm.viewmodel.KMMViewModel
+import com.rickclephas.kmm.viewmodel.MutableStateFlow
 import com.rickclephas.kmm.viewmodel.coroutineScope
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+
 class NewRollViewModel : KMMViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
-    val logger = Logger.withTag("NewRollViewModel")
+    private val logger = Logger.withTag("NewRollViewModel")
 
-    private val _viewState = MutableStateFlow<NewRollViewState>(NewRollViewState(latestRoll = null))
+    private val _viewState = MutableStateFlow<NewRollViewState>(viewModelScope, NewRollViewState(latestRoll = null))
     @NativeCoroutinesState
     val viewState: StateFlow<NewRollViewState>
         get() = _viewState
+
+	 val countryCode = MutableStateFlow<String?>(null)
 
     val minDiceCount = 1
     val maxDiceCount = 100

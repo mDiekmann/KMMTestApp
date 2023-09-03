@@ -11,13 +11,8 @@ plugins {
 kotlin {
     targetHierarchy.default()
 
-    android {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+    android ()
+    jvmToolchain(17)
 
     listOf(
         iosX64(),
@@ -100,6 +95,13 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
+    }
+
+    // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
+    // otherwise attempts to run javac with v8 and causes a mismatch
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
