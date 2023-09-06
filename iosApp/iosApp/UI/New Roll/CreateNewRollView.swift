@@ -11,34 +11,64 @@ import KMMViewModelSwiftUI
 import CommonKMM
 
 struct CreateNewRollView: View {
-    @ObservedViewModel var viewModel = NewRollViewModel()
+    @ObservedViewModel private var viewModel: NewRollViewModel
 
-    var colors = ["Red", "Green", "Blue", "Tartan"]
-    @State private var selectedColor = "Red"
-    @State private var diceSides: Int32 = 6
+    // can this be done with just using the viewModel inputs like in Android?
+    // it seems the Picker wants to write to those which doesn't work with the setup
+    @State private var selectedDiceCount: Int32
+    @State private var selectedDiceSides: DiceSides
+    
+    private var possibleDiceCounts: Array<Int32>
 
+    init(viewModel: NewRollViewModel) {
+        self.viewModel = viewModel
+        self.selectedDiceCount = viewModel.diceCountInput
+        self.selectedDiceSides = viewModel.diceSidesInput
+        
+        // viewModel.possibleDiceCounts is an array of CKMMInt which map to an NSNumber
+        // viewModel.diceCountInput is an Int32
+        // viewModel.updateDiceCount() takes in Int32
+        // mapping possibleDiceCounts to Int32 so types match and Picker selection can happen
+        self.possibleDiceCounts = viewModel.possibleCountArrayToInt32()
+        
+    }
+    
     var body: some View {
         VStack {
             HStack {
-                Picker("Please choose a color", selection: $selectedColor) {
-                    ForEach(colors, id: \.self) {
-                        Text($0)
+                Picker("Dice Count", selection: $selectedDiceCount) {
+                    ForEach(possibleDiceCounts, id: \.self) { number in
+                        Text("\(number)")
                     }
                 }
-                Text("d")
-                Picker("Your age", selection: $diceSides) {
+                .pickerStyle(WheelPickerStyle())
+                .onChange(of: selectedDiceCount) { newValue in
+                    viewModel.updateDiceCount(diceCount: newValue)
+                }
+                
+                Picker("Dice Sides", selection: $selectedDiceSides) {
                     ForEach(viewModel.possibleDiceSides, id: \.self) { number in
                         Text("\(number)")
                     }
                 }
+                .pickerStyle(WheelPickerStyle())
+                .onChange(of: selectedDiceSides) { newValue in
+                    viewModel.updateDiceSides(diceSides: newValue)
+                }
+            
             }
-            Text("You selected: \(diceSides)")
+
+            Text("You selected: \(selectedDiceCount)\(selectedDiceSides)")
+            
+            Button("Roll Dice") {
+                viewModel.rollDice()
+            }
         }
     }
 }
 
 struct CreateNewRollView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewRollView()
+        CreateNewRollView(viewModel: NewRollViewModel())
     }
 }

@@ -2,6 +2,7 @@ package com.mtd.kmmtestapp.network
 
 import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.models.DiceSides
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
@@ -30,14 +31,14 @@ class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
             socketTimeoutMillis = timeout
         }
     }
-    override suspend fun rollDice(diceCount: Int, diceSides: Int): DiceRoll {
+    override suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
         logger.v { "rollDice($diceCount,$diceSides)" }
         return client.get{
             url {
                 protocol = URLProtocol.HTTPS
                 host = "rolz.org"
                 path("api/")
-                parameters.run { append("", "${diceCount}d$diceSides.json") }
+                parameters.run { append("", "${diceCount}d${diceSides}.json") }
             }
         }.body()
     }

@@ -14,7 +14,7 @@ import kotlinx.serialization.encoding.encodeStructure
 
 @OptIn(kotlinx.serialization.ExperimentalSerializationApi::class)
 @Serializer(forClass = DiceRoll::class)
-class DiceRollSerializer : KSerializer<DiceRoll> {
+object DiceRollSerializer : KSerializer<DiceRoll> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DiceRoll") {
         element<String>("input")
         element<Int>("result")
@@ -48,6 +48,7 @@ class DiceRollSerializer : KSerializer<DiceRoll> {
                     else -> error("Unexpected index: $index")
                 }
             }
+
             //clean up input, has a leading = for some reason
             val trimmedInput = input.trim('=')
             DiceRoll(

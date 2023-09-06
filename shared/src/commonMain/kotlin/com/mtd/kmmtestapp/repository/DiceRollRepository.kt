@@ -3,6 +3,7 @@ package com.mtd.kmmtestapp.repository
 import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.data.LocalCache
 import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +19,7 @@ class DiceRollRepository : KoinComponent {
     fun getDiceRolls(): Flow<List<DiceRoll>> = localCache.getAllDiceRolls()
 
     @NativeCoroutines
-    suspend fun rollDice(diceCount: Int, diceSides: Int): DiceRoll {
+    suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
         logger.v { "rollDice($diceCount, $diceSides)" }
         val diceRoll = diceRollAPI.rollDice(diceCount, diceSides)
         logger.d { "Rolled $diceRoll" }

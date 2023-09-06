@@ -1,5 +1,6 @@
 package com.mtd.kmmtestapp
 
+import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.network.DiceRollAPI
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -25,7 +26,7 @@ class DiceRollAPITest {
             )
         }
         val api = DiceRollAPI(engine)
-        val result = api.rollDice(10, 12)
+        val result = api.rollDice(10, DiceSides.d12)
         assertTrue { result.input == "10d12" }
     }
 
@@ -39,7 +40,7 @@ class DiceRollAPITest {
         }
         val api = DiceRollAPI(engine)
         assertFailsWith<ClientRequestException> {
-            api.rollDice(10, 4)
+            api.rollDice(10, DiceSides.d4)
         }
     }
 }

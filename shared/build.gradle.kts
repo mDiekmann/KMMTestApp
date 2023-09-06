@@ -5,6 +5,7 @@ plugins {
     id("app.cash.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.rickclephas.kmp.nativecoroutines")
+    id("com.google.devtools.ksp")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -35,6 +36,7 @@ kotlin {
                 implementation(libs.coroutines.core)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
+                implementation(libs.kotlinx.serialization.json)
                 api(libs.moko.resources.core)
                 api(libs.kmm.viewmodel.core)
             }
@@ -60,28 +62,26 @@ kotlin {
             }
         }
 
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
         val iosMain by getting {
             dependencies {
                 implementation(libs.ktor.client.darwin)
                 implementation(libs.sqlDelight.native)
             }
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
         }
 
-        val iosTest by getting
-        val iosSimulatorArm64Main by getting {
-            dependsOn(iosMain)
-            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
-        }
-        val iosSimulatorArm64Test by getting {
-            dependsOn(iosTest)
-        }
-
-        // temporary workaround for KSP breaking MoKo Resources: https://github.com/icerockdev/moko-resources/issues/531
-        val iosX64Main by getting {
-            resources.srcDirs("build/generated/moko/iosX64Main/src")
-        }
-        val iosArm64Main by getting {
-            resources.srcDirs("build/generated/moko/iosArm64Main/src")
+        val iosSimulatorArm64Test by getting
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        val iosTest by getting {
+            iosX64Test.dependsOn(this)
+            iosArm64Test.dependsOn(this)
+            iosSimulatorArm64Test.dependsOn(this)
         }
     }
 
@@ -118,9 +118,12 @@ multiplatformResources {
     multiplatformResourcesClassName = "SharedRes" // optional, default MR
 }
 
-// temporary workaround for KSP breaking MoKo Resources: https://github.com/icerockdev/moko-resources/issues/531
-android {
-    sourceSets {
-        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
-    }
+tasks.matching { it.name == "kspKotlinIosX64" }.configureEach {
+    dependsOn(tasks.getByName("generateMRiosX64Main"))
+}
+tasks.matching { it.name == "kspKotlinIosArm64" }.configureEach {
+    dependsOn(tasks.getByName("generateMRiosArm64Main"))
+}
+tasks.matching { it.name == "kspKotlinIosSimulatorArm64" }.configureEach {
+    dependsOn(tasks.getByName("generateMRiosSimulatorArm64Main"))
 }

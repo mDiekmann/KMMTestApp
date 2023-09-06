@@ -20,6 +20,7 @@ kmm-viewmodel = "1.0.0-ALPHA-10"
 kmp-nativecoroutines = "1.0.0-ALPHA-12"
 koin = "3.4.1"
 kotlinx-datetime = "0.4.0"
+kotlinx-serialization = "1.5.1"
 ktor = "2.3.2"
 moko-graphics = "0.9.0"
 moko-resources = "0.23.0"
@@ -52,6 +53,8 @@ koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json" ,version.ref = "kotlinx-serialization" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }

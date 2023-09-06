@@ -12,7 +12,7 @@ import CommonKMM
 struct TabNavView: View {
     var body: some View {
         TabView {
-            ContentView()
+            CreateNewRollView(viewModel: NewRollViewModel())
                 .tabItem( {
                     Image(uiImage: SharedRes.images().dice_icon.toUIImage()!)
                         .resizable(capInsets: .init(top: 10.0, leading: 10.0, bottom: 10.0, trailing: 10.0))

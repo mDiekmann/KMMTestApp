@@ -8,11 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = DiceRollSerializer::class)
 data class DiceRoll(
-    @SerialName("input")
     val input: String,
-    @SerialName("result")
     val result: Int,
-    @SerialName("details")
     val details: String,
     @SerialName("timestamp")
     val rollTimeEpoch: Long
