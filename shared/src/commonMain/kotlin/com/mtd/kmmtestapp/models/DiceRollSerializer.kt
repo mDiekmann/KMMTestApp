@@ -2,7 +2,6 @@ package com.mtd.kmmtestapp.models
 
 import kotlinx.datetime.Clock
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.element
@@ -13,7 +12,6 @@ import kotlinx.serialization.encoding.decodeStructure
 import kotlinx.serialization.encoding.encodeStructure
 
 @OptIn(kotlinx.serialization.ExperimentalSerializationApi::class)
-@Serializer(forClass = DiceRoll::class)
 object DiceRollSerializer : KSerializer<DiceRoll> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DiceRoll") {
         element<String>("input")

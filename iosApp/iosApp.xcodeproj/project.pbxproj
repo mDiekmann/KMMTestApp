@@ -19,6 +19,9 @@
 		ABCDB84A2AA640D000E78DBF /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB8492AA640D000E78DBF /* KMPNativeCoroutinesAsync */; };
 		ABCDB84C2AA640D000E78DBF /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB84B2AA640D000E78DBF /* KMPNativeCoroutinesCore */; };
 		ABCDB84E2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */; };
+		ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */; };
+		ABCDB8522AABD8B500E78DBF /* NewDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */; };
+		ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +48,9 @@
 		ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRollView.swift; sourceTree = "<group>"; };
 		ABCDB8462AA51C4000E78DBF /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
 		ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewRollViewModel+Helpers.swift"; sourceTree = "<group>"; };
+		ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestRollView.swift; sourceTree = "<group>"; };
+		ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiceRollView.swift; sourceTree = "<group>"; };
+		ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollHistoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				ABCDB8442AA51C2000E78DBF /* System */,
-				ABCDB8372AA2ADF900E78DBF /* Helpers */,
 				ABCDB82E2AA29A7000E78DBF /* UI */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
@@ -123,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */,
+				ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */,
+				ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */,
 				ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */,
 			);
 			path = "New Roll";
@@ -131,15 +138,9 @@
 		ABCDB8302AA29A9600E78DBF /* Roll History */ = {
 			isa = PBXGroup;
 			children = (
+				ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */,
 			);
 			path = "Roll History";
-			sourceTree = "<group>";
-		};
-		ABCDB8372AA2ADF900E78DBF /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		ABCDB8442AA51C2000E78DBF /* System */ = {
@@ -254,7 +255,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCDB84E2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift in Sources */,
+				ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */,
 				ABCDB8472AA51C4000E78DBF /* KMMViewModel.swift in Sources */,
+				ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */,
+				ABCDB8522AABD8B500E78DBF /* NewDiceRollView.swift in Sources */,
 				ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
@@ -393,6 +397,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,6 +426,7 @@
 					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,7 +1,6 @@
 package com.mtd.kmmtestapp.viewModels
 
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.models.DiceRoll
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import com.rickclephas.kmm.viewmodel.KMMViewModel
@@ -19,7 +18,7 @@ class NewRollViewModel : KMMViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
     private val logger = Logger.withTag("NewRollViewModel")
 
-    private val _viewState = MutableStateFlow<NewRollViewState>(viewModelScope, NewRollViewState(latestRoll = null))
+    private val _viewState = MutableStateFlow<NewRollViewState>(viewModelScope, NewRollViewState())
     @NativeCoroutinesState
     val viewState: StateFlow<NewRollViewState>
         get() = _viewState.asStateFlow()
@@ -61,11 +60,14 @@ class NewRollViewModel : KMMViewModel(), KoinComponent {
         logger.d { "rollDice(${diceCountInput.value}, ${diceSidesInput.value})" }
 
         viewModelScope.coroutineScope.launch {
-            setLoadingState(isLoading = true)
+            setLoadingState(true)
             try {
                 val newRoll = diceRollRepo.rollDice(diceCountInput.value, diceSidesInput.value)
-                // s
-                _viewState.value = NewRollViewState(latestRoll = newRoll)
+
+                _viewState.value = NewRollViewState(LatestRollState.LastSuccessfulRoll(
+                    "Last Roll (${newRoll.input}): ${newRoll.result}",
+                    "${newRoll.detailsAsIntArray}"
+                ))
             } catch (e: Exception) {
                 logger.e(e) { "Exception during rollDice: $e" }
                 setErrorState("Error creating new roll")
@@ -91,8 +93,13 @@ on the negative side if special setters aren't created for a given state that us
 individual states can be cleared out as a side effect
  */
 
+sealed class LatestRollState() {
+    object Initial: LatestRollState()
+    data class LastSuccessfulRoll(val rollValue: String, val rollDetails: String): LatestRollState()
+}
+
 data class NewRollViewState(
-    val latestRoll: DiceRoll? = null,
+    val latestRollViewState: LatestRollState = LatestRollState.Initial,
     val error: String? = null,
     val isLoading: Boolean = false,
 )

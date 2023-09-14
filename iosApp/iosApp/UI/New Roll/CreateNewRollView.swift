@@ -58,8 +58,6 @@ struct CreateNewRollView: View {
             
             }
 
-            Text("You selected: \(selectedDiceCount)\(selectedDiceSides)")
-            
             Button("Roll Dice") {
                 viewModel.rollDice()
             }

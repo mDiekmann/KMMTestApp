@@ -11,22 +11,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.viewModels.LatestRollState
 
 @Composable
-fun RollResultsScreen(diceRoll: DiceRoll?) {
+fun RollResultsScreen(viewState: LatestRollState) {
     Column(
         Modifier
             .fillMaxWidth()
             .absolutePadding(10.dp, 20.dp, 10.dp, 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (diceRoll == null) {
+        if (viewState is LatestRollState.Initial) {
             Text(text = "Press above to roll")
-        } else {
-            Text(text = "Last Roll (${diceRoll.input}): ${diceRoll.result}")
+        } else if (viewState is LatestRollState.LastSuccessfulRoll){
+            Text(text = viewState.rollValue)
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "${diceRoll.detailsAsIntArray}")
+            Text(text = viewState.rollDetails)
         }
     }
 }
@@ -34,5 +34,5 @@ fun RollResultsScreen(diceRoll: DiceRoll?) {
 @Composable
 @Preview
 fun PreviewRollResultsScreen() {
-    RollResultsScreen(diceRoll = null)
+    RollResultsScreen(LatestRollState.Initial)
 }

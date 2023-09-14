@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,6 +25,7 @@ import com.mtd.kmmtestapp.viewModels.NewRollViewModel
 @Composable
 fun NewDiceRollScreen( viewModel: NewRollViewModel = viewModel() ) {
     val viewState by viewModel.viewState.collectAsState()
+    val scaffoldState = rememberScaffoldState()
 
     val contextForToast = LocalContext.current.applicationContext
 
@@ -41,10 +44,20 @@ fun NewDiceRollScreen( viewModel: NewRollViewModel = viewModel() ) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 CreateNewRollScreen(viewModel = viewModel)
-                RollResultsScreen(viewState.latestRoll)
+                RollResultsScreen(viewState.latestRollViewState)
             }
         }
     )
+
+    // How do I set this up to use the viewState error message?
+    if ( viewState.error != null ) {
+        LaunchedEffect(key1 = viewState) {
+            scaffoldState.snackbarHostState.showSnackbar(
+                message = "Error creating new roll",
+                actionLabel = "Dismiss"
+            )
+        }
+    }
 }
 
 @Composable

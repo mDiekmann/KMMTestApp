@@ -38,7 +38,7 @@ class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
                 protocol = URLProtocol.HTTPS
                 host = "rolz.org"
                 path("api/")
-                parameters.run { append("", "${diceCount}d${diceSides}.json") }
+                parameters.run { append("", "${diceCount}${diceSides}.json") }
             }
         }.body()
     }
