@@ -13,7 +13,7 @@ kotlin {
     targetHierarchy.default()
 
     android ()
-    jvmToolchain(17)
+    jvmToolchain(21)
 
     listOf(
         iosX64(),
@@ -100,8 +100,8 @@ android {
     // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
     // otherwise attempts to run javac with v8 and causes a mismatch
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 }
 
