@@ -10,10 +10,11 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mtd.kmmtestapp.res.SharedRes
+import dev.icerock.moko.resources.compose.fontFamilyResource
 
 @Composable
 fun MyApplicationTheme(
@@ -35,7 +36,7 @@ fun MyApplicationTheme(
     }
     val typography = Typography(
         body1 = TextStyle(
-            fontFamily = FontFamily.Default,
+            fontFamily = fontFamilyResource(fontResource = SharedRes.fonts.Roboto.medium),
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
         )

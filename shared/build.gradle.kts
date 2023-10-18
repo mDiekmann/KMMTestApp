@@ -13,7 +13,7 @@ kotlin {
     targetHierarchy.default()
 
     android ()
-    jvmToolchain(21)
+    jvmToolchain(17)
 
     listOf(
         iosX64(),
@@ -69,6 +69,7 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.darwin)
                 implementation(libs.sqlDelight.native)
+                implementation(libs.touchlab.kermit.simple)
             }
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
@@ -100,8 +101,8 @@ android {
     // TODO: Remove workaround for https://issuetracker.google.com/issues/260059413
     // otherwise attempts to run javac with v8 and causes a mismatch
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
