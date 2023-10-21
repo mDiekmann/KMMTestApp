@@ -1,34 +1,35 @@
 package com.mtd.kmmtestapp.repository
 
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.data.LocalCache
-import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.database.AppDatabase
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface
+import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 class DiceRollRepository : KoinComponent {
-    private val diceRollAPI: DiceRollAPIInterface by inject()
-    private val localCache: LocalCache by inject()
+    private val diceRollRemoteSource: DiceRollRemoteSource by inject()
+    private val appDatabase: AppDatabase by inject()
 
     private val logger = Logger.withTag("DiceRollRepository")
 
     @NativeCoroutines
-    fun getDiceRolls(): Flow<List<DiceRoll>> = localCache.getAllDiceRolls()
+    fun getDiceRolls(): Flow<List<DiceRoll>> = appDatabase.getAllDiceRolls()
 
     @NativeCoroutines
     suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
         logger.v { "rollDice($diceCount, $diceSides)" }
-        val diceRoll = diceRollAPI.rollDice(diceCount, diceSides)
+        val diceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides)
         logger.d { "Rolled $diceRoll" }
 
-        localCache.insertDiceRoll(diceRoll)
+        appDatabase.insertDiceRoll(diceRoll)
 
         return diceRoll
     }
 
     @NativeCoroutines
-    suspend fun clearLocalCache() = localCache.clearDatabase()
+    suspend fun clearLocalCache() = appDatabase.clearDatabase()
 }

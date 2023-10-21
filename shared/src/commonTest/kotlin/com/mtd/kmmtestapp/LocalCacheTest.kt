@@ -1,7 +1,8 @@
 package com.mtd.kmmtestapp
 
 import app.cash.sqldelight.db.SqlDriver
-import com.mtd.kmmtestapp.data.LocalCache
+import com.mtd.kmmtestapp.database.AppDatabase
+import com.mtd.kmmtestapp.models.DiceSides
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -14,12 +15,12 @@ import kotlin.test.assertTrue
 internal expect fun createTestDriver(): SqlDriver
 
 class LocalCacheTest {
-    private lateinit var localCache: LocalCache
+    private lateinit var appDatabase: AppDatabase
     private var testDriver = createTestDriver()
 
     @BeforeTest
     fun setup() {
-        localCache = LocalCache(testDriver, Dispatchers.Default)
+        appDatabase = AppDatabase(testDriver, Dispatchers.Default)
     }
 
     @AfterTest
@@ -30,41 +31,41 @@ class LocalCacheTest {
     @Test
     fun `Select All Rolls Success Batch Insert`() = runTest {
         val rollsToBeAdded = listOf(
-            TestUtil.makeDiceRoll(10, 12),
-            TestUtil.makeDiceRoll(3, 6)
+            TestUtil.makeDiceRoll(10, DiceSides.d12),
+            TestUtil.makeDiceRoll(3, DiceSides.d6)
         )
 
-        localCache.insertDiceRolls(rollsToBeAdded)
-        val result = localCache.getAllDiceRolls().first()
+        appDatabase.insertDiceRolls(rollsToBeAdded)
+        val result = appDatabase.getAllDiceRolls().first()
         assertEquals(rollsToBeAdded, result)
     }
 
     @Test
     fun `Select All Rolls Success Single Insert`() = runTest {
         val rollsToBeAdded = listOf(
-            TestUtil.makeDiceRoll(10, 12),
-            TestUtil.makeDiceRoll(3, 6)
+            TestUtil.makeDiceRoll(10, DiceSides.d12),
+            TestUtil.makeDiceRoll(3, DiceSides.d6)
         )
 
         for (roll in rollsToBeAdded) {
-            localCache.insertDiceRoll(roll)
+            appDatabase.insertDiceRoll(roll)
         }
 
-        val result = localCache.getAllDiceRolls().first()
+        val result = appDatabase.getAllDiceRolls().first()
         assertEquals(rollsToBeAdded, result)
     }
 
     @Test
     fun `Delete All Success`() = runTest {
         val rollsToBeAdded = listOf(
-            TestUtil.makeDiceRoll(10, 12),
-            TestUtil.makeDiceRoll(3, 6)
+            TestUtil.makeDiceRoll(10, DiceSides.d12),
+            TestUtil.makeDiceRoll(3, DiceSides.d6)
         )
 
-        localCache.insertDiceRolls(rollsToBeAdded)
-        assertTrue(localCache.getAllDiceRolls().first().isNotEmpty())
+        appDatabase.insertDiceRolls(rollsToBeAdded)
+        assertTrue(appDatabase.getAllDiceRolls().first().isNotEmpty())
 
-        localCache.clearDatabase()
-        assertTrue(localCache.getAllDiceRolls().first().count() == 0)
+        appDatabase.clearDatabase()
+        assertTrue(appDatabase.getAllDiceRolls().first().count() == 0)
     }
 }

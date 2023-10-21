@@ -1,7 +1,7 @@
 package com.mtd.kmmtestapp.network
 
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import com.mtd.kmmtestapp.models.DiceSides
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -17,6 +17,8 @@ import kotlinx.serialization.json.Json
 class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
 
     private val logger = Logger.withTag("DiceRollAPIImpl")
+    // obviously bad, but convenience on a test project
+    private val apiKey = "oXmol7fhypcsPZHgvnum94PCXN4RJ7sRi128ZhZp107f707d"
 
     private val client = HttpClient(engine) {
         expectSuccess = true

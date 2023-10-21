@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp
 
-import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import com.mtd.kmmtestapp.models.DiceSides
 import kotlinx.datetime.Clock
 

@@ -1,17 +1,17 @@
-package com.mtd.kmmtestapp.data
+package com.mtd.kmmtestapp.database
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import co.touchlab.kermit.Logger
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import com.mtd.kmmtestapp.db.Database
-import com.mtd.kmmtestapp.models.DiceRoll
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
-internal class LocalCache(
+internal class AppDatabase(
     sqlDriver: SqlDriver,
     private val backgroundDispatcher: CoroutineDispatcher
 ) {

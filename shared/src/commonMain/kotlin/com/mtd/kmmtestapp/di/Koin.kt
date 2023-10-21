@@ -1,8 +1,9 @@
 package com.mtd.kmmtestapp.di
 
-import com.mtd.kmmtestapp.data.LocalCache
+import com.mtd.kmmtestapp.database.AppDatabase
 import com.mtd.kmmtestapp.network.DiceRollAPI
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface
+import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.context.startKoin
@@ -32,20 +33,24 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
  tracked at: https://github.com/InsertKoinIO/koin/issues/1341
  */
 val appModules: Module get() = module  {
-    includes(apiModule, dispatcherModule, databaseModule, repositoryModule, platformModule)
+    includes(remoteModule, dispatcherModule, databaseModule, repositoryModule, platformModule)
 }
 
-val apiModule = module {
+val remoteModule = module {
     single<DiceRollAPIInterface> {
         DiceRollAPI(
             get()
         )
     }
+
+    single<DiceRollRemoteSource> {
+        DiceRollRemoteSource()
+    }
 }
 
 val databaseModule = module {
     single {
-        LocalCache(
+        AppDatabase(
             get(),
             get()
         )

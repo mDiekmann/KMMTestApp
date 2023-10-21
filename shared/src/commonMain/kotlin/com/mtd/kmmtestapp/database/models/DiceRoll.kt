@@ -1,5 +1,6 @@
-package com.mtd.kmmtestapp.models
+package com.mtd.kmmtestapp.database.models
 
+import com.mtd.kmmtestapp.database.util.DiceRollSerializer
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime

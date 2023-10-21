@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp.viewModels
 
-import com.mtd.kmmtestapp.models.DiceRoll
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow

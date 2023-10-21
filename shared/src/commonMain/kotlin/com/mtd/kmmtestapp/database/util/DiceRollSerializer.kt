@@ -1,5 +1,6 @@
-package com.mtd.kmmtestapp.models
+package com.mtd.kmmtestapp.database.util
 
+import com.mtd.kmmtestapp.database.models.DiceRoll
 import kotlinx.datetime.Clock
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
