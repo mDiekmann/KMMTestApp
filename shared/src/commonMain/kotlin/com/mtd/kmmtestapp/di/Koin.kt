@@ -1,6 +1,7 @@
 package com.mtd.kmmtestapp.di
 
 import com.mtd.kmmtestapp.database.AppDatabase
+import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.network.DiceRollAPI
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface
 import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
@@ -33,7 +34,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
  tracked at: https://github.com/InsertKoinIO/koin/issues/1341
  */
 val appModules: Module get() = module  {
-    includes(remoteModule, dispatcherModule, databaseModule, repositoryModule, platformModule)
+    includes(remoteModule, dispatcherModule, localModule, repositoryModule, platformModule)
 }
 
 val remoteModule = module {
@@ -48,12 +49,16 @@ val remoteModule = module {
     }
 }
 
-val databaseModule = module {
-    single {
+val localModule = module {
+    single<AppDatabase> {
         AppDatabase(
             get(),
             get()
         )
+    }
+
+    single<DiceRollLocalSource> {
+        DiceRollLocalSource()
     }
 }
 

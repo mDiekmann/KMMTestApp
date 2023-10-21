@@ -3,6 +3,7 @@ package com.mtd.kmmtestapp.repository
 import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.database.AppDatabase
 import com.mtd.kmmtestapp.database.models.DiceRoll
+import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface
 import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
@@ -12,12 +13,12 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 class DiceRollRepository : KoinComponent {
     private val diceRollRemoteSource: DiceRollRemoteSource by inject()
-    private val appDatabase: AppDatabase by inject()
+    private val diceRollLocalSource: DiceRollLocalSource by inject()
 
     private val logger = Logger.withTag("DiceRollRepository")
 
     @NativeCoroutines
-    fun getDiceRolls(): Flow<List<DiceRoll>> = appDatabase.getAllDiceRolls()
+    fun getDiceRolls(): Flow<List<DiceRoll>> = diceRollLocalSource.getAllDiceRolls()
 
     @NativeCoroutines
     suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
@@ -25,11 +26,11 @@ class DiceRollRepository : KoinComponent {
         val diceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides)
         logger.d { "Rolled $diceRoll" }
 
-        appDatabase.insertDiceRoll(diceRoll)
+        diceRollLocalSource.insertDiceRoll(diceRoll)
 
         return diceRoll
     }
 
     @NativeCoroutines
-    suspend fun clearLocalCache() = appDatabase.clearDatabase()
+    suspend fun clearLocalCache() = diceRollLocalSource.clearDatabase()
 }
