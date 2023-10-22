@@ -9,6 +9,7 @@ import com.mtd.kmmtestapp.network.models.RollResponseModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
@@ -33,6 +34,20 @@ class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
         expectSuccess = true
         install(ContentNegotiation) {
             json(Json { isLenient = true; ignoreUnknownKeys = true })
+        }
+
+        install(DefaultRequest) {
+            url {
+                protocol = URLProtocol.HTTPS
+                host = "dddice.com"
+
+                headers {
+                    append(HttpHeaders.Accept, ContentType.Application.Json.toString())
+                    append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                    append(HttpHeaders.Authorization, "Bearer " + apiKey)
+                    append(HttpHeaders.UserAgent, "KMP Test Client")
+                }
+            }
         }
 
         install(HttpTimeout) {
@@ -70,15 +85,7 @@ class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
         )
         return client.post{
             url {
-                protocol = URLProtocol.HTTPS
-                host = "dddice.com"
                 path("api/1.0/roll")
-                headers {
-                    append(HttpHeaders.Accept, ContentType.Application.Json.toString())
-                    append(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                    append(HttpHeaders.Authorization, "Bearer " + apiKey)
-                    append(HttpHeaders.UserAgent, "KMP Test Client")
-                }
                 setBody(bodyContent)
             }
         }.body()
