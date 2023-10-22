@@ -24,7 +24,8 @@ class DiceRollRepository : KoinComponent {
     suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
         logger.v { "rollDice($diceCount, $diceSides)" }
         val diceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides)
-        logger.d { "Rolled $diceRoll" }
+        val newDiceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides, "NSrQNmc")
+        logger.d { "Rolled $newDiceRoll" }
 
         diceRollLocalSource.insertDiceRoll(diceRoll)
 
