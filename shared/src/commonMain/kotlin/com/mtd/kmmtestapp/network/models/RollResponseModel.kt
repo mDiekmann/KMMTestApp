@@ -1,9 +1,7 @@
 package com.mtd.kmmtestapp.network.models
 
-import com.mtd.kmmtestapp.database.util.DiceRollSerializer
 import com.mtd.kmmtestapp.models.DiceSides
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
@@ -28,7 +26,6 @@ data class RollResponseModel(
     val created_at: String,
     val total_value: Int,
     val equation: String,
-    @SerialName("values")
     val diceResults: List<DiceResponseModel>
 )
 

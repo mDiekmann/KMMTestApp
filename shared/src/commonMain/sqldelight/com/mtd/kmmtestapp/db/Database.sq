@@ -1,18 +1,22 @@
-CREATE TABLE DiceRolls (
-    input TEXT NOT NULL,
-    result INTEGER NOT NULL,
-    details TEXT NOT NULL,
-    rollTimeEpoch INTEGER NOT NULL
+import com.mtd.kmmtestapp.database.models.DiceEntity;
+import kotlin.collections.List;
+
+CREATE TABLE RollEntity (
+    uuid TEXT NOT NULL,
+    creationDate TEXT NOT NULL,
+    diceValues TEXT AS List<DiceEntity> NOT NULL,
+    totalValue INTEGER NOT NULL,
+    rollEquation TEXT NOT NULL
 );
 
 insertDiceRoll:
-INSERT INTO DiceRolls(input, result, details, rollTimeEpoch)
-VALUES(?, ?, ?, ?);
+INSERT INTO RollEntity(uuid, creationDate, diceValues, totalValue, rollEquation)
+VALUES(?, ?, ?, ?, ?);
 
 removeAllDiceRolls:
-DELETE FROM DiceRolls;
+DELETE FROM RollEntity;
 
 selectAllDiceRolls:
-SELECT DiceRolls.*
-FROM DiceRolls
-ORDER BY rollTimeEpoch DESC;
+SELECT RollEntity.*
+FROM RollEntity
+ORDER BY creationDate DESC;

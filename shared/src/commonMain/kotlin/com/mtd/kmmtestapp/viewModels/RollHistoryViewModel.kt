@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp.viewModels
 
-import com.mtd.kmmtestapp.database.models.DiceRoll
+import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import com.rickclephas.kmm.viewmodel.KMMViewModel
 import com.rickclephas.kmm.viewmodel.MutableStateFlow
@@ -14,9 +14,9 @@ import org.koin.core.component.inject
 class RollHistoryViewModel: KMMViewModel(), KoinComponent {
     private val diceRollRepository : DiceRollRepository by inject()
 
-    private var _diceRolls = MutableStateFlow<List<DiceRoll>>(viewModelScope, emptyList())
+    private var _diceRolls = MutableStateFlow<List<RollInfoModel>>(viewModelScope, emptyList())
     @NativeCoroutinesState
-    val diceRolls: StateFlow<List<DiceRoll>>
+    val diceRolls: StateFlow<List<RollInfoModel>>
         get() = _diceRolls
 
     init {

@@ -5,29 +5,26 @@ import com.mtd.kmmtestapp.network.DiceRollAPI
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.ClientRequestException
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.headersOf
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class DiceRollAPITest {
+    private val apiMockEngine = DiceRollAPIMock()
+    private val apiMock = DiceRollAPI(apiMockEngine.get())
+
     @Test
-    fun `Successful Request`() = runTest {
-        val engine = MockEngine {
-            assertEquals("https://rolz.org/api/?=10d12.json", it.url.toString())
-            respond(
-                content = """{"input":"10d12","result":44,"details":" (11 +2 +4 +2 +10 +2 +8 +3 +1 +1) ","code":"","illustration":"<span style=\"color: gray;\"><\/span> <span class=\"dc_dice_a\">10<\/span><span class=\"dc_dice_d\">D12<\/span>","timestamp":1692573592,"x":1692573592}""",
-                headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-            )
-        }
-        val api = DiceRollAPI(engine)
-        val result = api.rollDice(10, DiceSides.d12)
-        assertTrue { result.input == "10d12" }
+    fun `Test Roll with Room Slug`() = runTest {
+        val result = apiMock.rollDice(2, DiceSides.d20, roomSlug = null)
+        assertTrue { result.equation == "2d20" }
+    }
+
+    @Test
+    fun `Test Roll without Room Slug`()  = runTest {
+        val result = apiMock.rollDice(2, DiceSides.d20, "NSrQNmc")
+        assertTrue { result.equation == "2d20" }
     }
 
     @Test
@@ -40,7 +37,7 @@ class DiceRollAPITest {
         }
         val api = DiceRollAPI(engine)
         assertFailsWith<ClientRequestException> {
-            api.rollDice(10, DiceSides.d4)
+            api.rollDice(2, DiceSides.d20, roomSlug = null)
         }
     }
 }

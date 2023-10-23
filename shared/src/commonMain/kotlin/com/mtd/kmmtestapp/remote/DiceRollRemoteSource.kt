@@ -8,6 +8,5 @@ import org.koin.core.component.inject
 class DiceRollRemoteSource: KoinComponent {
     private val diceRollAPI: DiceRollAPIInterface by inject()
 
-    suspend fun rollDice(diceCount: Int, diceSides: DiceSides) = diceRollAPI.rollDice(diceCount, diceSides)
     suspend fun rollDice(diceCount: Int, diceSides: DiceSides, roomSlug: String?) = diceRollAPI.rollDice(diceCount, diceSides, roomSlug)
 }

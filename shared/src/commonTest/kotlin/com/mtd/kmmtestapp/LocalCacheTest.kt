@@ -33,7 +33,7 @@ class LocalCacheTest {
         val rollsToBeAdded = listOf(
             TestUtil.makeDiceRoll(10, DiceSides.d12),
             TestUtil.makeDiceRoll(3, DiceSides.d6)
-        )
+        ).sortedByDescending { it.creationDate }
 
         appDatabase.insertDiceRolls(rollsToBeAdded)
         val result = appDatabase.getAllDiceRolls().first()
@@ -45,7 +45,7 @@ class LocalCacheTest {
         val rollsToBeAdded = listOf(
             TestUtil.makeDiceRoll(10, DiceSides.d12),
             TestUtil.makeDiceRoll(3, DiceSides.d6)
-        )
+        ).sortedByDescending { it.creationDate }
 
         for (roll in rollsToBeAdded) {
             appDatabase.insertDiceRoll(roll)

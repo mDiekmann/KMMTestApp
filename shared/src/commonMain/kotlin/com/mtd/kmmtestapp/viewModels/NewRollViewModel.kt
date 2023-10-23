@@ -64,10 +64,12 @@ class NewRollViewModel : KMMViewModel(), KoinComponent {
             try {
                 val newRoll = diceRollRepo.rollDice(diceCountInput.value, diceSidesInput.value)
 
-                _viewState.value = NewRollViewState(LatestRollState.LastSuccessfulRoll(
-                    "Last Roll (${newRoll.input}): ${newRoll.result}",
-                    "${newRoll.detailsAsIntArray}"
-                ))
+                _viewState.value = NewRollViewState(
+                    LatestRollState.LastSuccessfulRoll(
+                    "Last Roll (${newRoll.equation}): ${newRoll.total}",
+                    newRoll.resultsArr.contentToString()
+                )
+                )
             } catch (e: Exception) {
                 logger.e(e) { "Exception during rollDice: $e" }
                 setErrorState("Error creating new roll")

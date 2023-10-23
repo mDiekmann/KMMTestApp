@@ -1,14 +1,15 @@
 package com.mtd.kmmtestapp.repository
 
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.database.AppDatabase
-import com.mtd.kmmtestapp.database.models.DiceRoll
+import com.mtd.kmmtestapp.database.models.DiceEntity
+import com.mtd.kmmtestapp.db.RollEntity
 import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.models.DiceSides
-import com.mtd.kmmtestapp.network.DiceRollAPIInterface
+import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
 import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.transform
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 class DiceRollRepository : KoinComponent {
@@ -18,18 +19,33 @@ class DiceRollRepository : KoinComponent {
     private val logger = Logger.withTag("DiceRollRepository")
 
     @NativeCoroutines
-    fun getDiceRolls(): Flow<List<DiceRoll>> = diceRollLocalSource.getAllDiceRolls()
+    fun getDiceRolls(): Flow<List<RollInfoModel>> = diceRollLocalSource.getAllDiceRolls().transform {
+        emit(
+            it.map {
+                RollInfoModel.fromEntity(it)
+            }
+        )
+    }
 
     @NativeCoroutines
-    suspend fun rollDice(diceCount: Int, diceSides: DiceSides): DiceRoll {
+    suspend fun rollDice(diceCount: Int, diceSides: DiceSides): RollInfoModel {
         logger.v { "rollDice($diceCount, $diceSides)" }
-        val diceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides)
         val newDiceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides, "NSrQNmc")
         logger.d { "Rolled $newDiceRoll" }
 
-        diceRollLocalSource.insertDiceRoll(diceRoll)
+        val rollEntity = RollEntity(
+            newDiceRoll.uuid,
+            newDiceRoll.created_at,
+            newDiceRoll.diceResults.map {
+                DiceEntity(it.type, it.value)
+            },
+            newDiceRoll.total_value.toLong(),
+            newDiceRoll.equation
+        )
 
-        return diceRoll
+        diceRollLocalSource.insertDiceRoll(rollEntity)
+
+        return RollInfoModel.fromEntity(rollEntity)
     }
 
     @NativeCoroutines

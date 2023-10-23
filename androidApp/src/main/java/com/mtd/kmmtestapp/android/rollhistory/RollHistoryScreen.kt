@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.mtd.kmmtestapp.database.models.DiceRoll
+import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.res.SharedRes
 import com.mtd.kmmtestapp.viewModels.RollHistoryViewModel
 
@@ -69,7 +69,7 @@ fun RollHistoryScreen() {
 
 @Composable
 fun DiceRollList(
-    items: List<DiceRoll>
+    items: List<RollInfoModel>
 ) {
     val listState = rememberLazyListState()
 
@@ -79,7 +79,7 @@ fun DiceRollList(
     ){
         itemsIndexed(items = items,
             itemContent = { _, item ->
-                Text(text = item.input)
+                Text(text = item.equation)
             })
 
     }

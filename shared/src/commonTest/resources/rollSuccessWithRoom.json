@@ -1,0 +1,113 @@
+{
+	"data": {
+		"uuid": "b7e7b5f3-1dd5-463f-9dbd-f363e9c2d8b0",
+		"direction": 180,
+		"updated_at": "2023-10-22T21:56:05.000000Z",
+		"created_at": "2023-10-22T21:56:05.000000Z",
+		"values": [
+			{
+				"is_cleared": false,
+				"is_dropped": false,
+				"is_hidden": false,
+				"is_user_value": false,
+				"is_visible": true,
+				"uuid": "6499cba7-e66f-4ff9-868c-5deab62aba4e",
+				"type": "d20",
+				"theme": "dddice-red",
+				"value": 18,
+				"value_to_display": 18
+			},
+			{
+				"is_cleared": false,
+				"is_dropped": false,
+				"is_hidden": false,
+				"is_user_value": false,
+				"is_visible": true,
+				"uuid": "afeee95c-fcab-497e-bc95-4b1855d6ac56",
+				"type": "d20",
+				"theme": "dddice-red",
+				"value": 8,
+				"value_to_display": 8
+			}
+		],
+		"participants": [],
+		"user": {
+			"username": "testAccount",
+			"uuid": "8b529398-6eac-11ee-ab79-e6fb1cecbcb6",
+			"name": "Guest User",
+			"created_at": "2023-10-19T18:23:04.000000Z",
+			"updated_at": "2023-10-20T22:34:15.000000Z"
+		},
+		"room": {
+			"is_public": true,
+			"name": "Untitled Room",
+			"bg_file_path": null,
+			"passcode": "praesentium",
+			"slug": "NSrQNmc",
+			"custom_slug": null,
+			"settings": {
+				"chat": {
+					"textSize": "sm",
+					"fadeAfter": 10,
+					"isVisible": true,
+					"textColor": 16777215,
+					"deleteAfter": 30,
+					"isDiceSorted": false,
+					"isDiceExpanded": false,
+					"backgroundColor": 0,
+					"isUsernameVisible": true
+				},
+				"roll": {
+					"pickUp": 1,
+					"diceSize": 1,
+					"autoClear": 10,
+					"diceLimit": 25,
+					"diceTrayColor": 0,
+					"disableDiceOutline": false,
+					"disableDiceShadows": false,
+					"allowPlayerMoveDice": false,
+					"disableShakingSound": false,
+					"defaultClickBehavior": "reroll",
+					"allowPlayerRollUpdates": false
+				},
+				"physics": {
+					"gravity": 9.82,
+					"throwSpeed": 30
+				},
+				"lighting": {
+					"ambientColor": 16777215,
+					"spotlightColor": 16777215,
+					"ambientIntensity": 0.5,
+					"spotlightIntensity": 0.33
+				},
+				"participant": {
+					"defaultDiceTrayToGM": false
+				}
+			},
+			"created_at": "2023-10-19T18:23:04.000000Z",
+			"updated_at": "2023-10-20T22:11:59.000000Z",
+			"deleted_at": null,
+			"participants": [
+				{
+					"id": 143262,
+					"username": "Game Master",
+					"color": "#cedf27",
+					"position": 180,
+					"created_at": "2023-10-19T18:23:04.000000Z",
+					"updated_at": "2023-10-19T18:23:04.000000Z",
+					"deleted_at": null,
+					"user": {
+						"username": "testAccount",
+						"uuid": "8b529398-6eac-11ee-ab79-e6fb1cecbcb6",
+						"name": "Guest User",
+						"created_at": "2023-10-19T18:23:04.000000Z",
+						"updated_at": "2023-10-20T22:34:15.000000Z"
+					}
+				}
+			]
+		},
+		"total_value": 26,
+		"equation": "2d20",
+		"external_id": null
+	}
+}
