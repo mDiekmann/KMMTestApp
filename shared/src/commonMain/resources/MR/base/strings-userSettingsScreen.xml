@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="userSettingsTitle">User Settings</string>
+    <string name="roomSlugLable">Count</string>
+
+    <string name="userSettingsLabel">Settings</string>
+</resources>

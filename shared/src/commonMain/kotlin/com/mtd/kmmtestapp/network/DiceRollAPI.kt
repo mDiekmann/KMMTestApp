@@ -11,7 +11,6 @@ import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -31,7 +30,7 @@ class DiceRollAPI(private val engine: HttpClientEngine) : DiceRollAPIInterface {
     private val client = HttpClient(engine) {
         expectSuccess = true
         install(ContentNegotiation) {
-            json(Json { isLenient = true; ignoreUnknownKeys = true })
+            json(Json { isLenient = true; ignoreUnknownKeys = true; explicitNulls = false })
         }
 
         install(DefaultRequest) {

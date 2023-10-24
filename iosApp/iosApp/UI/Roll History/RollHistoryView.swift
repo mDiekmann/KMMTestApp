@@ -19,8 +19,8 @@ struct RollHistoryView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.diceRolls, id: \.rollTimeEpoch) { diceRoll in
-                Text(diceRoll.input)
+            List(viewModel.diceRolls, id: \.rollTime) { diceRoll in
+                Text(diceRoll.equation)
             }
                 .navigationBarTitleDisplayMode(.inline)
                    .toolbar {

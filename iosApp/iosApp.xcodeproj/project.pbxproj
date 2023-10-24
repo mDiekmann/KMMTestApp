@@ -11,6 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127B92AE73B71007114E1 /* UserSettingsView.swift */; };
+		AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */; };
+		AB6127C12AE835C9007114E1 /* NewRollViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */; };
 		ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8312AA29AB400E78DBF /* TabNavView.swift */; };
 		ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */; };
 		ABCDB8412AA51BE800E78DBF /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB8402AA51BE800E78DBF /* KMMViewModelCore */; };
@@ -44,6 +47,9 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB6127B92AE73B71007114E1 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
+		AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserSettingsViewModel+iOS.swift"; sourceTree = "<group>"; };
+		AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewRollViewModel+iOS.swift"; sourceTree = "<group>"; };
 		ABCDB8312AA29AB400E78DBF /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
 		ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRollView.swift; sourceTree = "<group>"; };
 		ABCDB8462AA51C4000E78DBF /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
@@ -114,11 +120,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AB6127B82AE73B58007114E1 /* User Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AB6127B92AE73B71007114E1 /* UserSettingsView.swift */,
+				AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */,
+			);
+			path = "User Settings";
+			sourceTree = "<group>";
+		};
 		ABCDB82E2AA29A7000E78DBF /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				ABCDB82F2AA29A8700E78DBF /* New Roll */,
 				ABCDB8302AA29A9600E78DBF /* Roll History */,
+				AB6127B82AE73B58007114E1 /* User Settings */,
 				ABCDB8312AA29AB400E78DBF /* TabNavView.swift */,
 			);
 			path = UI;
@@ -131,6 +147,7 @@
 				ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */,
 				ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */,
 				ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */,
+				AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */,
 			);
 			path = "New Roll";
 			sourceTree = "<group>";
@@ -255,12 +272,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */,
 				ABCDB84E2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift in Sources */,
 				ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */,
 				ABCDB8472AA51C4000E78DBF /* KMMViewModel.swift in Sources */,
 				ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */,
 				ABCDB8522AABD8B500E78DBF /* NewDiceRollView.swift in Sources */,
+				AB6127C12AE835C9007114E1 /* NewRollViewModel+iOS.swift in Sources */,
 				ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */,
+				AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */,

@@ -21,6 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.mtd.kmmtestapp.android.newroll.NewDiceRollScreen
 import com.mtd.kmmtestapp.android.rollhistory.RollHistoryScreen
+import com.mtd.kmmtestapp.android.userSettings.UserSettingsScreen
 import com.mtd.kmmtestapp.res.SharedRes
 
 sealed class BottomNavigationScreens(val route: String, @StringRes val stringRes: Int, val imageRes: Int) {
@@ -33,6 +34,11 @@ sealed class BottomNavigationScreens(val route: String, @StringRes val stringRes
         "RollHistory",
         SharedRes.strings.rollHistoryLabel.resourceId,
         SharedRes.images.list_icon.drawableResId
+    )
+    object UserSettings : BottomNavigationScreens(
+        "UserSettings",
+        SharedRes.strings.userSettingsLabel.resourceId,
+        SharedRes.images.settings_icon.drawableResId
     )
 }
 
@@ -49,6 +55,10 @@ fun AppNavigation(navController: NavHostController,
         composable(route = BottomNavigationScreens.RollHistory.route)
         {
             RollHistoryScreen()
+        }
+        composable(route = BottomNavigationScreens.UserSettings.route)
+        {
+            UserSettingsScreen()
         }
     }
 }
@@ -100,6 +110,7 @@ fun MainScreen() {
     val bottomNavigationItems = listOf(
         BottomNavigationScreens.NewRoll,
         BottomNavigationScreens.RollHistory,
+        BottomNavigationScreens.UserSettings,
     )
 
     Scaffold(

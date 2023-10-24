@@ -28,6 +28,14 @@ struct TabNavView: View {
                     Text(SharedRes.strings().rollHistoryLabel.desc().localized())
                     
                 })
+            
+            UserSettingsView(viewModel: UserSettingsViewModel())
+                .tabItem( {
+                    Image(uiImage: SharedRes.images().settings_icon.toUIImage()!)
+                        .renderingMode(.template)
+                    Text(SharedRes.strings().userSettingsLabel.desc().localized())
+                    
+                })
         }
     }
 }

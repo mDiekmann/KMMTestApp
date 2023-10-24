@@ -1,6 +1,7 @@
 package com.mtd.kmmtestapp.viewModels
 
 import co.touchlab.kermit.Logger
+import com.mtd.kmmtestapp.UserSettings
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.repository.DiceRollRepository
 import com.rickclephas.kmm.viewmodel.KMMViewModel
@@ -14,8 +15,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-class NewRollViewModel : KMMViewModel(), KoinComponent {
+open class NewRollViewModel() : KMMViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
+    private val userSettings : UserSettings by inject()
     private val logger = Logger.withTag("NewRollViewModel")
 
     private val _viewState = MutableStateFlow<NewRollViewState>(viewModelScope, NewRollViewState())
@@ -62,7 +64,7 @@ class NewRollViewModel : KMMViewModel(), KoinComponent {
         viewModelScope.coroutineScope.launch {
             setLoadingState(true)
             try {
-                val newRoll = diceRollRepo.rollDice(diceCountInput.value, diceSidesInput.value)
+                val newRoll = diceRollRepo.rollDice(diceCountInput.value, diceSidesInput.value, userSettings.getRoomSlug())
 
                 _viewState.value = NewRollViewState(
                     LatestRollState.LastSuccessfulRoll(

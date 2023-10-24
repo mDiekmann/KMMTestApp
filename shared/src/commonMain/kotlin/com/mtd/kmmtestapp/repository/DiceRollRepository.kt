@@ -28,9 +28,9 @@ class DiceRollRepository : KoinComponent {
     }
 
     @NativeCoroutines
-    suspend fun rollDice(diceCount: Int, diceSides: DiceSides): RollInfoModel {
+    suspend fun rollDice(diceCount: Int, diceSides: DiceSides, roomSlug: String?): RollInfoModel {
         logger.v { "rollDice($diceCount, $diceSides)" }
-        val newDiceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides, "NSrQNmc")
+        val newDiceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides, roomSlug)
         logger.d { "Rolled $newDiceRoll" }
 
         val rollEntity = RollEntity(
