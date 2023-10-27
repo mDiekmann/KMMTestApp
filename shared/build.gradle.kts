@@ -6,6 +6,7 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.rickclephas.kmp.nativecoroutines")
     id("com.google.devtools.ksp")
+    id("co.touchlab.skie")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)

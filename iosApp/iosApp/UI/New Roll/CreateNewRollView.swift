@@ -38,7 +38,7 @@ struct CreateNewRollView: View {
                 
             Picker("Dice Sides", selection: $viewModel.selectedDiceSides) {
                     ForEach(viewModel.possibleDiceSides, id: \.self) { number in
-                        Text("\(number)")
+                        Text(number.name)
                     }
                 }
                 .pickerStyle(WheelPickerStyle())

@@ -11,6 +11,8 @@ plugins {
     alias(libs.plugins.sqldelight) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.kmp.nativecoroutines) apply false
+
+    alias(libs.plugins.touchlab.skie) apply false
 }
 
 tasks.register("clean", Delete::class) {
