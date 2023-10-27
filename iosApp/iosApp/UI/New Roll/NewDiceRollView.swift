@@ -23,11 +23,7 @@ struct NewDiceRollView: View {
                 CreateNewRollView(viewModel: viewModel)
                 LatestRollView(viewState: viewModel.viewState.latestRollViewState)
             }
-            .overlay {
-                if viewModel.viewState.isLoading {
-                    ProgressView("Loading")
-                }
-            }
+            .activity(isVisible: viewModel.viewState.isLoading)
             .navigationBarTitleDisplayMode(.inline)
                .toolbar {
                    ToolbarItem(placement: .principal) {

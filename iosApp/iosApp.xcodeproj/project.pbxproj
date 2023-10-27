@@ -14,6 +14,7 @@
 		AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127B92AE73B71007114E1 /* UserSettingsView.swift */; };
 		AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */; };
 		AB6127C12AE835C9007114E1 /* NewRollViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */; };
+		AB6127C32AEC16CE007114E1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C22AEC16CE007114E1 /* LoadingView.swift */; };
 		ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8312AA29AB400E78DBF /* TabNavView.swift */; };
 		ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */; };
 		ABCDB8412AA51BE800E78DBF /* KMMViewModelCore in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB8402AA51BE800E78DBF /* KMMViewModelCore */; };
@@ -50,6 +51,7 @@
 		AB6127B92AE73B71007114E1 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 		AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserSettingsViewModel+iOS.swift"; sourceTree = "<group>"; };
 		AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewRollViewModel+iOS.swift"; sourceTree = "<group>"; };
+		AB6127C22AEC16CE007114E1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		ABCDB8312AA29AB400E78DBF /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
 		ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRollView.swift; sourceTree = "<group>"; };
 		ABCDB8462AA51C4000E78DBF /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				ABCDB8302AA29A9600E78DBF /* Roll History */,
 				AB6127B82AE73B58007114E1 /* User Settings */,
 				ABCDB8312AA29AB400E78DBF /* TabNavView.swift */,
+				AB6127C22AEC16CE007114E1 /* LoadingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				AB6127C32AEC16CE007114E1 /* LoadingView.swift in Sources */,
 				ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
