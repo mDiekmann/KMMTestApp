@@ -5,7 +5,7 @@ plugins {
     id("app.cash.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
     id("com.rickclephas.kmp.nativecoroutines")
-    id("com.google.devtools.ksp")
+    //id("com.google.devtools.ksp")
     id("co.touchlab.skie")
 }
 
@@ -132,4 +132,10 @@ tasks.matching { it.name == "kspKotlinIosArm64" }.configureEach {
 }
 tasks.matching { it.name == "kspKotlinIosSimulatorArm64" }.configureEach {
     dependsOn(tasks.getByName("generateMRiosSimulatorArm64Main"))
+}
+
+android {
+    sourceSets {
+        getByName("main").java.srcDirs("build/generated/moko/androidMain/src")
+    }
 }
