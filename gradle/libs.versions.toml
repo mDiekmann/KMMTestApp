@@ -7,7 +7,7 @@ targetSdk = "33"
 compileSdk = "33"
 
 # Dependencies
-android-gradle-plugin = "8.0.0"
+android-gradle-plugin = "8.1.1"
 androidx-activity-compose = "1.7.1"
 androidx-lifecycle = "2.6.1"
 compose = "1.4.3"
@@ -78,6 +78,8 @@ sqlDelight-native = { group = "app.cash.sqldelight", name = "native-driver" ,ver
 
 touchlab-kermit = { group = "co.touchlab", name = "kermit" ,version.ref = "kermit" }
 touchlab-kermit-simple = { group = "co.touchlab", name = "kermit-simple" ,version.ref = "kermit" }
+skie-configuration-annotations = { group = "co.touchlab.skie", name = "configuration-annotations" ,version.ref = "skie" }
+
 androidx-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version = "1.2.1" }
 
 [bundles]

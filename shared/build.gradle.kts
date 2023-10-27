@@ -38,6 +38,7 @@ kotlin {
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
                 implementation(libs.kotlinx.serialization.json)
+                implementation(libs.skie.configuration.annotations)
                 api(libs.moko.resources.core)
                 api(libs.kmm.viewmodel.core)
             }
