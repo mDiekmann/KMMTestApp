@@ -10,7 +10,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-
+/*
+playing around with Sealed class for view state
+Issues with the error use case in iOS but great for specifying the empty use-case
+ */
 class RollHistoryViewModel: ViewModel(), KoinComponent {
     private val diceRollRepository : DiceRollRepository by inject()
     private val logger = Logger.withTag("RollHistoryViewModel")
