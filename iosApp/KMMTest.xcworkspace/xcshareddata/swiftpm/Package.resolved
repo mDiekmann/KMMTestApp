@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rickclephas/KMM-ViewModel.git",
       "state" : {
-        "branch" : "v1.0.0-ALPHA-10",
-        "revision" : "6f43fa74fb0b15e8eb3bcae61a89400fd0c798c6"
+        "branch" : "v1.0.0-ALPHA-14",
+        "revision" : "19c723cb7b8c054c5914c481a9a425cc4b7884a5"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rickclephas/KMP-NativeCoroutines.git",
       "state" : {
-        "branch" : "v1.0.0-ALPHA-12",
-        "revision" : "a749c33323506f9e303e73d446ff4c5c36f4cb12"
+        "branch" : "v1.0.0-ALPHA-18",
+        "revision" : "7f2c99fb4a93dcd5327fafd577aa3cd7fff47a30"
       }
     },
     {

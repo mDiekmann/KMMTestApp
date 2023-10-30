@@ -22,7 +22,6 @@
 		ABCDB8472AA51C4000E78DBF /* KMMViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8462AA51C4000E78DBF /* KMMViewModel.swift */; };
 		ABCDB84A2AA640D000E78DBF /* KMPNativeCoroutinesAsync in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB8492AA640D000E78DBF /* KMPNativeCoroutinesAsync */; };
 		ABCDB84C2AA640D000E78DBF /* KMPNativeCoroutinesCore in Frameworks */ = {isa = PBXBuildFile; productRef = ABCDB84B2AA640D000E78DBF /* KMPNativeCoroutinesCore */; };
-		ABCDB84E2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */; };
 		ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */; };
 		ABCDB8522AABD8B500E78DBF /* NewDiceRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */; };
 		ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */; };
@@ -55,7 +54,6 @@
 		ABCDB8312AA29AB400E78DBF /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
 		ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRollView.swift; sourceTree = "<group>"; };
 		ABCDB8462AA51C4000E78DBF /* KMMViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMMViewModel.swift; sourceTree = "<group>"; };
-		ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewRollViewModel+Helpers.swift"; sourceTree = "<group>"; };
 		ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestRollView.swift; sourceTree = "<group>"; };
 		ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiceRollView.swift; sourceTree = "<group>"; };
 		ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollHistoryView.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */,
 				ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */,
 				ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */,
-				ABCDB84D2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift */,
 				AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */,
 			);
 			path = "New Roll";
@@ -276,7 +273,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */,
-				ABCDB84E2AA7C4F300E78DBF /* NewRollViewModel+Helpers.swift in Sources */,
 				ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */,
 				ABCDB8472AA51C4000E78DBF /* KMMViewModel.swift in Sources */,
 				ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */,
@@ -496,7 +492,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMM-ViewModel.git";
 			requirement = {
-				branch = "v1.0.0-ALPHA-10";
+				branch = "v1.0.0-ALPHA-14";
 				kind = branch;
 			};
 		};
@@ -504,7 +500,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
 			requirement = {
-				branch = "v1.0.0-ALPHA-12";
+				branch = "v1.0.0-ALPHA-18";
 				kind = branch;
 			};
 		};
