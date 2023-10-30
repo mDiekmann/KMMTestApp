@@ -23,6 +23,6 @@ class UserSettingsViewModel: CommonKMM.UserSettingsViewModel {
     
     override init() {
         super.init()
-        roomSlugText = self.roomSlug ?? ""
+        roomSlugText = roomSlug.value ?? ""
     }
 }

@@ -7,10 +7,9 @@
 //
 
 import SwiftUI
-import KMMViewModelSwiftUI
 
 struct UserSettingsView: View {
-    @ObservedViewModel private var viewModel: UserSettingsViewModel
+    @State private var viewModel: UserSettingsViewModel
     
     init(viewModel: UserSettingsViewModel) {
         self.viewModel = viewModel
@@ -18,7 +17,7 @@ struct UserSettingsView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .center, spacing: 16) {
-                Text("Enter your text:")
+                Text("Room Slug:")
                     .font(.headline)
                 
                 TextField("Room Slug", text: $viewModel.roomSlugText)

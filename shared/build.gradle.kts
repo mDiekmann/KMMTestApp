@@ -4,8 +4,6 @@ plugins {
     id("com.android.library")
     id("app.cash.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
-    id("com.rickclephas.kmp.nativecoroutines")
-    //id("com.google.devtools.ksp")
     id("co.touchlab.skie")
 }
 
@@ -40,7 +38,6 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.skie.configuration.annotations)
                 api(libs.moko.resources.core)
-                api(libs.kmm.viewmodel.core)
             }
         }
         val commonTest by getting {
@@ -124,15 +121,7 @@ multiplatformResources {
     multiplatformResourcesClassName = "SharedRes" // optional, default MR
 }
 
-tasks.matching { it.name == "kspKotlinIosX64" }.configureEach {
-    dependsOn(tasks.getByName("generateMRiosX64Main"))
-}
-tasks.matching { it.name == "kspKotlinIosArm64" }.configureEach {
-    dependsOn(tasks.getByName("generateMRiosArm64Main"))
-}
-tasks.matching { it.name == "kspKotlinIosSimulatorArm64" }.configureEach {
-    dependsOn(tasks.getByName("generateMRiosSimulatorArm64Main"))
-}
+
 
 android {
     sourceSets {

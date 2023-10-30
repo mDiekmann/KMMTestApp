@@ -7,11 +7,10 @@
 //
 
 import SwiftUI
-import KMMViewModelSwiftUI
 import CommonKMM
 
 struct CreateNewRollView: View {
-    @ObservedViewModel private var viewModel: NewRollViewModel
+    @State private var viewModel: NewRollViewModel
     
     private var possibleDiceCounts: Array<Int32>
 
@@ -46,7 +45,9 @@ struct CreateNewRollView: View {
             }
 
             Button("Roll Dice") {
-                viewModel.rollDice()
+                Task{
+                    try? await viewModel.rollDice()
+                }
             }
         }
     }

@@ -4,26 +4,21 @@ import co.touchlab.kermit.Logger
 import com.mtd.kmmtestapp.UserSettings
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.repository.DiceRollRepository
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
-import com.rickclephas.kmm.viewmodel.coroutineScope
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-open class NewRollViewModel() : KMMViewModel(), KoinComponent {
+open class NewRollViewModel() : ViewModel(), KoinComponent {
     private val diceRollRepo : DiceRollRepository by inject()
     private val userSettings : UserSettings by inject()
     private val logger = Logger.withTag("NewRollViewModel")
 
-    private val _viewState = MutableStateFlow<NewRollViewState>(viewModelScope, NewRollViewState())
-    @NativeCoroutinesState
+    private val mutableViewState: MutableStateFlow<NewRollViewState> = MutableStateFlow(NewRollViewState())
     val viewState: StateFlow<NewRollViewState>
-        get() = _viewState.asStateFlow()
+        get() = mutableViewState.asStateFlow()
 
     val minDiceCount = 1
     val maxDiceCount = 100
@@ -37,15 +32,11 @@ open class NewRollViewModel() : KMMViewModel(), KoinComponent {
         DiceSides.d100
     )
 
-    private val _diceCountInput = MutableStateFlow<Int>(viewModelScope, possibleDiceCounts.first())
-    @NativeCoroutinesState
+    private val _diceCountInput = MutableStateFlow<Int>(possibleDiceCounts.first())
     val diceCountInput: StateFlow<Int>
         get() = _diceCountInput.asStateFlow()
 
-    private val _diceSidesInput = MutableStateFlow<DiceSides>(viewModelScope, possibleDiceSides.first())
-
-
-    @NativeCoroutinesState
+    private val _diceSidesInput = MutableStateFlow<DiceSides>(possibleDiceSides.first())
     val diceSidesInput: StateFlow<DiceSides>
         get() = _diceSidesInput.asStateFlow()
 
@@ -58,38 +49,41 @@ open class NewRollViewModel() : KMMViewModel(), KoinComponent {
         _diceSidesInput.value = diceSides
     }
 
-    fun rollDice() {
+    suspend fun rollDice() {
         logger.d { "rollDice(${diceCountInput.value}, ${diceSidesInput.value})" }
 
-        viewModelScope.coroutineScope.launch {
-            setLoadingState(true)
-            try {
-                val newRoll = diceRollRepo.rollDice(diceCountInput.value, diceSidesInput.value, userSettings.getRoomSlug())
+        // set loading state, will be cleared on repository update
+        setLoadingState(true)
 
-                _viewState.value = NewRollViewState(
-                    LatestRollState.LastSuccessfulRoll(
+        try {
+            val newRoll = diceRollRepo.rollDice(
+                diceCountInput.value,
+                diceSidesInput.value,
+                userSettings.getRoomSlug()
+            )
+            mutableViewState.value = NewRollViewState(
+                LatestRollState.LastSuccessfulRoll(
                     "Last Roll (${newRoll.equation}): ${newRoll.total}",
                     newRoll.resultsArr.contentToString()
                 )
-                )
-            } catch (e: Exception) {
-                logger.e(e) { "Exception during rollDice: $e" }
-                setErrorState("Error creating new roll")
-            }
+            )
+        } catch (e: Exception) {
+            logger.e(e) { "Exception during rollDice: $e" }
+            setErrorState("Error creating new roll")
         }
     }
 
     private fun setLoadingState(isLoading: Boolean) {
-        _viewState.value = _viewState.value.copy(isLoading= isLoading)
+        mutableViewState.value = mutableViewState.value.copy(isLoading= isLoading)
     }
 
     private fun setErrorState(error: String?) {
-        _viewState.value = _viewState.value.copy(isLoading= false, error = error)
+        mutableViewState.value = mutableViewState.value.copy(isLoading= false, error = error)
     }
 }
 
 /*
-using an all encompassing versus individual values has it's trade offs
+using an all sealed versus data class has it's trade offs
 
 on the plus side setting latest roll or error will reset isLoading automatically
 

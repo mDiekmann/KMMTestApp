@@ -7,7 +7,6 @@ import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.models.DiceSides
 import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.remote.DiceRollRemoteSource
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutines
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 import org.koin.core.component.KoinComponent
@@ -18,7 +17,6 @@ class DiceRollRepository : KoinComponent {
 
     private val logger = Logger.withTag("DiceRollRepository")
 
-    @NativeCoroutines
     fun getDiceRolls(): Flow<List<RollInfoModel>> = diceRollLocalSource.getAllDiceRolls().transform {
         emit(
             it.map {
@@ -27,7 +25,6 @@ class DiceRollRepository : KoinComponent {
         )
     }
 
-    @NativeCoroutines
     suspend fun rollDice(diceCount: Int, diceSides: DiceSides, roomSlug: String?): RollInfoModel {
         logger.v { "rollDice($diceCount, $diceSides)" }
         val newDiceRoll = diceRollRemoteSource.rollDice(diceCount, diceSides, roomSlug)
@@ -48,6 +45,5 @@ class DiceRollRepository : KoinComponent {
         return RollInfoModel.fromEntity(rollEntity)
     }
 
-    @NativeCoroutines
     suspend fun clearLocalCache() = diceRollLocalSource.clearDatabase()
 }

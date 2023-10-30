@@ -3,4 +3,6 @@
     <string name="rollHistoryTitle">Roll History</string>
 
     <string name="rollHistoryLabel">History</string>
+
+    <string name="rollHistoryEmptyLabel">Past rolls will appear here as they are created</string>
 </resources>

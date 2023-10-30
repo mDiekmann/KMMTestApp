@@ -8,15 +8,18 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.chargemap.compose.numberpicker.ListItemPicker
 import com.mtd.kmmtestapp.viewModels.NewRollViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun CreateNewRollScreen(viewModel: NewRollViewModel) {
     val diceCountInput by viewModel.diceCountInput.collectAsState()
     val diceSidesInput by viewModel.diceSidesInput.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -39,7 +42,9 @@ fun CreateNewRollScreen(viewModel: NewRollViewModel) {
     }
     Button(
         onClick = {
-            viewModel.rollDice()
+            coroutineScope.launch {
+                viewModel.rollDice()
+            }
         },
         shape = RoundedCornerShape(size = 20.dp)
     ) {

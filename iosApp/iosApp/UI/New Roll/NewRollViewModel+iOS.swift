@@ -33,7 +33,7 @@ class NewRollViewModel: CommonKMM.NewRollViewModel {
     
     override init() {
         super.init()
-        selectedDiceCount = self.diceCountInput
-        selectedDiceSides = self.diceSidesInput
+        selectedDiceCount = Int32(truncating: self.diceCountInput.value)
+        selectedDiceSides = self.diceSidesInput.value
     }
 }

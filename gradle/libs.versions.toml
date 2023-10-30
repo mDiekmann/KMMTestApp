@@ -16,8 +16,6 @@ composeCompiler = "1.5.3"
 coroutines = "1.7.3"
 ksp = "1.9.10-1.0.13" # for KMP-NativeCoroutines
 kermit = "2.0.2"
-kmm-viewmodel = "1.0.0-ALPHA-14"
-kmp-nativecoroutines = "1.0.0-ALPHA-18"
 koin = "3.4.1"
 kotlinx-datetime = "0.4.0"
 kotlinx-serialization = "1.5.1"
@@ -45,8 +43,6 @@ compose-navigation = { group = "androidx.navigation", name = "navigation-compose
 
 
 chargemap-compose-numberpicker = { group = "com.chargemap.compose", name = "numberpicker" ,version.ref = "numberpicker" }
-
-kmm-viewmodel-core = { group = "com.rickclephas.kmm", name = "kmm-viewmodel-core" ,version.ref = "kmm-viewmodel" }
 
 koin-android = { group = "io.insert-koin", name = "koin-android" ,version.ref = "koin" }
 koin-core = { group = "io.insert-koin", name = "koin-core" ,version.ref = "koin" }
@@ -105,9 +101,6 @@ shared-commonTest = [
 ]
 
 [plugins]
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-kmp-nativecoroutines = { id = "com.rickclephas.kmp.nativecoroutines", version.ref = "kmp-nativecoroutines" }
-
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources"}

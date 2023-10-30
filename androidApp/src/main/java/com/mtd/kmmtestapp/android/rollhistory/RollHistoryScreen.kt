@@ -2,13 +2,17 @@ package com.mtd.kmmtestapp.android.rollhistory
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -17,9 +21,12 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
@@ -33,15 +40,20 @@ import androidx.compose.ui.unit.dp
 import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.res.SharedRes
 import com.mtd.kmmtestapp.viewModels.RollHistoryViewModel
+import com.mtd.kmmtestapp.viewModels.RollHistoryViewState
+import kotlinx.coroutines.launch
 
 @Composable
 fun RollHistoryScreen() {
     val viewModel = remember {
         RollHistoryViewModel()
     }
+    val viewState by viewModel.viewState.collectAsState()
+    LaunchedEffect(viewModel) {
+        viewModel.activate()
+    }
 
-    val pastRolls by viewModel.diceRolls.collectAsState()
-
+    val coroutineScope = rememberCoroutineScope()
     val contextForToast = LocalContext.current.applicationContext
 
     Scaffold(
@@ -49,7 +61,11 @@ fun RollHistoryScreen() {
             TopAppBar(
                 title = { Text(stringResource(id = SharedRes.strings.rollHistoryTitle.resourceId)) },
                 actions = {
-                    IconButton(onClick = { viewModel.clearDiceRolls() }) {
+                    IconButton(onClick = {
+                        coroutineScope.launch {
+                            viewModel.clearDiceRolls()
+                        }
+                    }) {
                         Icon(Icons.Filled.Delete, null)
                     }
                 }
@@ -61,15 +77,54 @@ fun RollHistoryScreen() {
                     .padding(padding)
                     .fillMaxSize()
             ) {
-                DiceRollList(pastRolls)
+                when(val state = viewState) {
+                    is RollHistoryViewState.Empty -> Empty()
+                    is RollHistoryViewState.Success -> {
+                        val rolls = state.rolls
+                        Success(successData = rolls)
+                    }
+                    is RollHistoryViewState.Error -> {
+                        val error = state.error
+                        DisplayError(error)
+                    }
+
+                    RollHistoryViewState.Initial -> {
+                        // no-op
+                    }
+                }
             }
         }
     )
 }
 
 @Composable
+fun Empty() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(stringResource(id = SharedRes.strings.rollHistoryEmptyLabel.resourceId))
+    }
+}
+
+@Composable
+fun DisplayError(error: String) {
+
+}
+
+@Composable
+fun Success(
+    successData: List<RollInfoModel>
+) {
+    DiceRollList(diceRolls = successData)
+}
+
+@Composable
 fun DiceRollList(
-    items: List<RollInfoModel>
+    diceRolls: List<RollInfoModel>
 ) {
     val listState = rememberLazyListState()
 
@@ -77,11 +132,9 @@ fun DiceRollList(
         state = listState,
         modifier = Modifier.simpleVerticalScrollbar(state = listState)
     ){
-        itemsIndexed(items = items,
-            itemContent = { _, item ->
-                Text(text = item.equation)
-            })
-
+        items(diceRolls) { item ->
+            Text(text = item.equation)
+        }
     }
 }
 

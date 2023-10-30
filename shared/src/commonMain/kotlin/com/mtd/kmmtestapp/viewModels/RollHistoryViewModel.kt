@@ -1,40 +1,68 @@
 package com.mtd.kmmtestapp.viewModels
 
+import co.touchlab.kermit.Logger
+import co.touchlab.skie.configuration.annotations.DefaultArgumentInterop
 import com.mtd.kmmtestapp.models.RollInfoModel
 import com.mtd.kmmtestapp.repository.DiceRollRepository
-import com.rickclephas.kmm.viewmodel.KMMViewModel
-import com.rickclephas.kmm.viewmodel.MutableStateFlow
-import com.rickclephas.kmm.viewmodel.coroutineScope
-import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class RollHistoryViewModel: KMMViewModel(), KoinComponent {
+class RollHistoryViewModel: ViewModel(), KoinComponent {
     private val diceRollRepository : DiceRollRepository by inject()
+    private val logger = Logger.withTag("RollHistoryViewModel")
 
-    private var _diceRolls = MutableStateFlow<List<RollInfoModel>>(viewModelScope, emptyList())
-    @NativeCoroutinesState
-    val diceRolls: StateFlow<List<RollInfoModel>>
-        get() = _diceRolls
+    private var mutableViewState: MutableStateFlow<RollHistoryViewState> = MutableStateFlow(
+        RollHistoryViewState.Initial)
 
-    init {
+    val viewState: StateFlow<RollHistoryViewState> = mutableViewState.asStateFlow()
+
+    suspend fun activate() {
         observeDiceRolls()
     }
 
-    private fun observeDiceRolls() {
-        //TODO: There must be a better way to do this
-        viewModelScope.coroutineScope.launch {
-            diceRollRepository.getDiceRolls().collect{ rolls ->
-                _diceRolls.value = rolls
+    override fun onCleared() {
+        logger.v("Clearing RollHistoryViewModel")
+    }
+
+    private suspend fun observeDiceRolls() {
+        diceRollRepository.getDiceRolls().collect{ rolls ->
+            mutableViewState.update {
+                if (rolls.isNotEmpty()) {
+                    RollHistoryViewState.Success(rolls)
+                } else {
+                    RollHistoryViewState.Empty()
+                }
             }
         }
     }
 
-    fun clearDiceRolls() {
-        viewModelScope.coroutineScope.launch {
-            diceRollRepository.clearLocalCache()
-        }
+    suspend fun clearDiceRolls() {
+        diceRollRepository.clearLocalCache()
     }
+}
+
+sealed class RollHistoryViewState {
+    abstract val isLoading: Boolean
+
+    data object Initial : RollHistoryViewState() {
+        override val isLoading: Boolean = true
+    }
+
+    data class Empty @DefaultArgumentInterop.Enabled constructor(
+        override val isLoading: Boolean = false
+    ) : RollHistoryViewState()
+
+    data class Success @DefaultArgumentInterop.Enabled constructor(
+        val rolls: List<RollInfoModel>,
+        override val isLoading: Boolean = false
+    ) : RollHistoryViewState()
+
+    data class Error @DefaultArgumentInterop.Enabled constructor(
+        val error: String,
+        override val isLoading: Boolean = false
+    ) : RollHistoryViewState()
 }

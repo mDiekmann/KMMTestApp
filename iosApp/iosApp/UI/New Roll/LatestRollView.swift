@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import KMMViewModelSwiftUI
 import CommonKMM
 
 struct LatestRollView: View {
