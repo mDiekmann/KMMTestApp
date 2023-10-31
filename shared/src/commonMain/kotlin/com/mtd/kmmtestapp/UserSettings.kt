@@ -1,12 +1,10 @@
 package com.mtd.kmmtestapp
 
-val roomSlugKey = "RoomSlug"
 public interface UserSettings {
     public companion object;
 
-    public interface Factory {
-        public fun create(): UserSettings
-    }
+    val roomSlugKey: String
+        get() = "RoomSlug"
 
     public fun getRoomSlug(): String?
     public fun setRoomSlug(roomSlug: String?)
