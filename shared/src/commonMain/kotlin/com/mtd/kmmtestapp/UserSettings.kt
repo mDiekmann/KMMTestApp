@@ -1,8 +1,6 @@
 package com.mtd.kmmtestapp
 
 public interface UserSettings {
-    public companion object;
-
     val roomSlugKey: String
         get() = "RoomSlug"
 
