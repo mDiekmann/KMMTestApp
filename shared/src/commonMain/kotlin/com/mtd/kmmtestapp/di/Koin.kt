@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp.di
 
-import com.mtd.kmmtestapp.database.AppDatabase
+import com.mtd.kmmtestapp.data.AppDatabase
 import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.network.DiceRollAPI
 import com.mtd.kmmtestapp.network.DiceRollAPIInterface

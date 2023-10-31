@@ -1,7 +1,7 @@
 package com.mtd.kmmtestapp
 
 import app.cash.sqldelight.db.SqlDriver
-import com.mtd.kmmtestapp.database.AppDatabase
+import com.mtd.kmmtestapp.data.AppDatabase
 import com.mtd.kmmtestapp.models.DiceSides
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first

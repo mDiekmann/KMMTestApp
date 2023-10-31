@@ -1,7 +1,7 @@
-package com.mtd.kmmtestapp.database.adapters
+package com.mtd.kmmtestapp.data.adapters
 
 import app.cash.sqldelight.ColumnAdapter
-import com.mtd.kmmtestapp.database.models.DiceEntity
+import com.mtd.kmmtestapp.data.models.DiceEntity
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
