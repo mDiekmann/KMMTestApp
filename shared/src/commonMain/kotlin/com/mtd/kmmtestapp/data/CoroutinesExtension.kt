@@ -1,4 +1,4 @@
-package com.mtd.kmmtestapp.database
+package com.mtd.kmmtestapp.data
 
 import app.cash.sqldelight.Transacter
 import app.cash.sqldelight.TransactionWithoutReturn

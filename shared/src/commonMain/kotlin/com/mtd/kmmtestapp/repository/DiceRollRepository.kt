@@ -1,7 +1,7 @@
 package com.mtd.kmmtestapp.repository
 
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.database.models.DiceEntity
+import com.mtd.kmmtestapp.data.models.DiceEntity
 import com.mtd.kmmtestapp.db.RollEntity
 import com.mtd.kmmtestapp.local.DiceRollLocalSource
 import com.mtd.kmmtestapp.models.DiceSides

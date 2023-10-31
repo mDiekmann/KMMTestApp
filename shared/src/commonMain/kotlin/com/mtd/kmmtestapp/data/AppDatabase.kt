@@ -1,10 +1,10 @@
-package com.mtd.kmmtestapp.database
+package com.mtd.kmmtestapp.data
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.db.SqlDriver
 import co.touchlab.kermit.Logger
-import com.mtd.kmmtestapp.database.adapters.DiceValuesAdapter
+import com.mtd.kmmtestapp.data.adapters.DiceValuesAdapter
 import com.mtd.kmmtestapp.db.Database
 import com.mtd.kmmtestapp.db.RollEntity
 import kotlinx.coroutines.CoroutineDispatcher

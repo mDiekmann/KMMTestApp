@@ -1,6 +1,6 @@
 package com.mtd.kmmtestapp
 
-import com.mtd.kmmtestapp.database.models.DiceEntity
+import com.mtd.kmmtestapp.data.models.DiceEntity
 import com.mtd.kmmtestapp.db.RollEntity
 import com.mtd.kmmtestapp.models.DiceSides
 import kotlinx.datetime.Clock
