@@ -1,4 +1,4 @@
-import com.mtd.kmmtestapp.database.models.DiceEntity;
+import com.mtd.kmmtestapp.data.models.DiceEntity;
 import kotlin.collections.List;
 
 CREATE TABLE RollEntity (
