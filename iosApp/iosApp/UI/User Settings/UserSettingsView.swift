@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct UserSettingsView: View {
-    @State private var viewModel: UserSettingsViewModel
+    @State private var viewModel: NativeUserSettingsViewModel
     
-    init(viewModel: UserSettingsViewModel) {
+    init(viewModel: NativeUserSettingsViewModel) {
         self.viewModel = viewModel
     }
     var body: some View {
@@ -20,7 +20,7 @@ struct UserSettingsView: View {
                 Text("Room Slug:")
                     .font(.headline)
                 
-                TextField("Room Slug", text: $viewModel.roomSlugText)
+                TextField("Room Slug", text: $viewModel.roomSlug)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 16)
             }
