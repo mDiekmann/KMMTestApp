@@ -10,32 +10,23 @@ import SwiftUI
 import CommonKMM
 
 struct CreateNewRollView: View {
-    @State private var viewModel: NewRollViewModel
-    
-    private var possibleDiceCounts: Array<Int32>
+    @ObservedObject private var viewModel: NativeNewRollViewModel
 
-    init(viewModel: NewRollViewModel) {
+    init(viewModel: NativeNewRollViewModel) {
         self.viewModel = viewModel
-        
-        // viewModel.possibleDiceCounts is an array of CKMMInt which map to an NSNumber
-        // viewModel.diceCountInput is an Int32
-        // viewModel.updateDiceCount() takes in Int32
-        // mapping possibleDiceCounts to Int32 so types match and Picker selection can happen
-        self.possibleDiceCounts = viewModel.possibleDiceCountArr
-        
     }
     
     var body: some View {
         VStack {
             HStack {
-                Picker("Dice Count", selection: $viewModel.selectedDiceCount) {
-                    ForEach(possibleDiceCounts, id: \.self) { number in
+                Picker("Dice Count", selection: $viewModel.diceCountInput) {
+                    ForEach(viewModel.possibleDiceCounts, id: \.self) { number in
                         Text("\(number)")
                     }
                 }
                 .pickerStyle(WheelPickerStyle())
                 
-            Picker("Dice Sides", selection: $viewModel.selectedDiceSides) {
+            Picker("Dice Sides", selection: $viewModel.diceSidesInput) {
                     ForEach(viewModel.possibleDiceSides, id: \.self) { number in
                         Text(number.name)
                     }
@@ -46,7 +37,7 @@ struct CreateNewRollView: View {
 
             Button("Roll Dice") {
                 Task{
-                    try? await viewModel.rollDice()
+                    await viewModel.rollDice()
                 }
             }
         }
@@ -55,6 +46,6 @@ struct CreateNewRollView: View {
 
 struct CreateNewRollView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewRollView(viewModel: NewRollViewModel())
+        CreateNewRollView(viewModel: NativeNewRollViewModel(userSettings: iOSUserSettings(delegate: UserDefaults.standard)))
     }
 }

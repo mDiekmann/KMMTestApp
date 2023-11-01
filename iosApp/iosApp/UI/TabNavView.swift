@@ -10,9 +10,11 @@ import SwiftUI
 import CommonKMM
 
 struct TabNavView: View {
+    @StateObject var newRollViewModel = NativeNewRollViewModel(userSettings: iOSUserSettings(delegate: UserDefaults.standard))
+    
     var body: some View {
         TabView {
-            NewDiceRollView(viewModel: NewRollViewModel())
+            NewDiceRollView(viewModel: newRollViewModel)
                 .tabItem( {
                     Image(uiImage: SharedRes.images().dice_icon.toUIImage()!)
                         .resizable(capInsets: .init(top: 10.0, leading: 10.0, bottom: 10.0, trailing: 10.0))

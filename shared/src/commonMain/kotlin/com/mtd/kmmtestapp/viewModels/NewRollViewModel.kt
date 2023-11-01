@@ -64,7 +64,11 @@ open class NewRollViewModel() : ViewModel(), KoinComponent {
             mutableViewState.value = NewRollViewState(
                 LatestRollState.LastSuccessfulRoll(
                     "Last Roll (${newRoll.equation}): ${newRoll.total}",
-                    newRoll.resultsArr.contentToString()
+                    newRoll.resultsArr.joinToString(
+                        prefix = "[",
+                        separator = ", ",
+                        postfix = "]"
+                    )
                 )
             )
         } catch (e: Exception) {

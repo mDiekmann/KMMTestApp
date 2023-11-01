@@ -10,21 +10,21 @@ import SwiftUI
 import CommonKMM
 
 struct NewDiceRollView: View {
-    @State private var viewModel: NewRollViewModel
-    @State private var viewState: NewRollViewState
+    @ObservedObject private var viewModel: NativeNewRollViewModel
+    //@State private var viewState: NewRollViewState
     
-    init(viewModel: NewRollViewModel) {
+    init(viewModel: NativeNewRollViewModel) {
         self.viewModel = viewModel
-        self.viewState = viewModel.viewState.value
+        //self.viewState = viewModel.viewState.value
     }
     
     var body: some View {
         NavigationView {
             VStack(spacing: 20.0) {
                 CreateNewRollView(viewModel: viewModel)
-                LatestRollView(viewState: viewState.latestRollViewState)
+                LatestRollView(viewState: viewModel.latestRollViewState)
             }
-            .activity(isVisible: viewModel.viewState.value.isLoading)
+            .activity(isVisible: viewModel.isLoading)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                ToolbarItem(placement: .principal) {
@@ -33,25 +33,12 @@ struct NewDiceRollView: View {
                    }
                }
             }
-            .task {
-                // this isn't great, I'm assuming this is what the swift package for KMMViewModel handles
-                await withTaskCancellationHandler(
-                    operation: {
-                        for await viewState in viewModel.viewState {
-                            self.viewState = viewState
-                        }
-                    },
-                    onCancel: {
-                        viewModel.clear()
-                    }
-                )
-            }
         }
     }
 }
 
 struct NewDiceRollView_Previews: PreviewProvider {
     static var previews: some View {
-        NewDiceRollView(viewModel: NewRollViewModel())
+        NewDiceRollView(viewModel: NativeNewRollViewModel(userSettings: iOSUserSettings(delegate: UserDefaults.standard)))
     }
 }

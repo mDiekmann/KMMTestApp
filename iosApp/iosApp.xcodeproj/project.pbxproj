@@ -11,9 +11,9 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		AB2B64C42AF1B13200713F8E /* NativeNewRollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B64C32AF1B13200713F8E /* NativeNewRollViewModel.swift */; };
 		AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127B92AE73B71007114E1 /* UserSettingsView.swift */; };
 		AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */; };
-		AB6127C12AE835C9007114E1 /* NewRollViewModel+iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */; };
 		AB6127C32AEC16CE007114E1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C22AEC16CE007114E1 /* LoadingView.swift */; };
 		ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8312AA29AB400E78DBF /* TabNavView.swift */; };
 		ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */; };
@@ -42,9 +42,9 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB2B64C32AF1B13200713F8E /* NativeNewRollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeNewRollViewModel.swift; sourceTree = "<group>"; };
 		AB6127B92AE73B71007114E1 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 		AB6127BB2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserSettingsViewModel+iOS.swift"; sourceTree = "<group>"; };
-		AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewRollViewModel+iOS.swift"; sourceTree = "<group>"; };
 		AB6127C22AEC16CE007114E1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		ABCDB8312AA29AB400E78DBF /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
 		ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRollView.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				ABCDB8332AA2A68600E78DBF /* CreateNewRollView.swift */,
 				ABCDB84F2AA8C87700E78DBF /* LatestRollView.swift */,
 				ABCDB8512AABD8B500E78DBF /* NewDiceRollView.swift */,
-				AB6127C02AE835C9007114E1 /* NewRollViewModel+iOS.swift */,
+				AB2B64C32AF1B13200713F8E /* NativeNewRollViewModel.swift */,
 			);
 			path = "New Roll";
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 				ABE8BFF32AAFCA0100D685F4 /* RollHistoryView.swift in Sources */,
 				ABCDB8502AA8C87700E78DBF /* LatestRollView.swift in Sources */,
 				ABCDB8522AABD8B500E78DBF /* NewDiceRollView.swift in Sources */,
-				AB6127C12AE835C9007114E1 /* NewRollViewModel+iOS.swift in Sources */,
+				AB2B64C42AF1B13200713F8E /* NativeNewRollViewModel.swift in Sources */,
 				ABCDB8342AA2A68600E78DBF /* CreateNewRollView.swift in Sources */,
 				AB6127BC2AE82D45007114E1 /* UserSettingsViewModel+iOS.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,

@@ -8,7 +8,7 @@ class RollInfoModel (
     val rollTime: Instant,
     val total: Int,
     val equation: String,
-    val resultsArr: Array<Int>
+    val resultsArr: List<Int>
 ) {
     companion object {
         fun fromEntity(rollEntity: RollEntity): RollInfoModel {
@@ -16,7 +16,7 @@ class RollInfoModel (
             val rollDate = rollEntity.creationDate.toInstant()
             val resultsArr = rollEntity.diceValues.map {
                 it.value
-            }.toTypedArray()
+            }.toList()
 
             return RollInfoModel(
                 rollDate,
