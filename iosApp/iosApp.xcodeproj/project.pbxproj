@@ -13,6 +13,7 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		AB2B64C42AF1B13200713F8E /* NativeNewRollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B64C32AF1B13200713F8E /* NativeNewRollViewModel.swift */; };
 		AB2B64C62AF2949300713F8E /* NativeUserSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B64C52AF2949300713F8E /* NativeUserSettingsViewModel.swift */; };
+		AB2B64C82AF298D600713F8E /* NativeRollHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2B64C72AF298D600713F8E /* NativeRollHistoryViewModel.swift */; };
 		AB6127BA2AE73B71007114E1 /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127B92AE73B71007114E1 /* UserSettingsView.swift */; };
 		AB6127C32AEC16CE007114E1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6127C22AEC16CE007114E1 /* LoadingView.swift */; };
 		ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDB8312AA29AB400E78DBF /* TabNavView.swift */; };
@@ -44,6 +45,7 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB2B64C32AF1B13200713F8E /* NativeNewRollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeNewRollViewModel.swift; sourceTree = "<group>"; };
 		AB2B64C52AF2949300713F8E /* NativeUserSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeUserSettingsViewModel.swift; sourceTree = "<group>"; };
+		AB2B64C72AF298D600713F8E /* NativeRollHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeRollHistoryViewModel.swift; sourceTree = "<group>"; };
 		AB6127B92AE73B71007114E1 /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
 		AB6127C22AEC16CE007114E1 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		ABCDB8312AA29AB400E78DBF /* TabNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavView.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE8BFF22AAFCA0100D685F4 /* RollHistoryView.swift */,
+				AB2B64C72AF298D600713F8E /* NativeRollHistoryViewModel.swift */,
 			);
 			path = "Roll History";
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				AB6127C32AEC16CE007114E1 /* LoadingView.swift in Sources */,
+				AB2B64C82AF298D600713F8E /* NativeRollHistoryViewModel.swift in Sources */,
 				ABCDB8322AA29AB400E78DBF /* TabNavView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

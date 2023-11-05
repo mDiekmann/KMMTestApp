@@ -11,6 +11,7 @@ import CommonKMM
 
 struct TabNavView: View {
     @StateObject var newRollViewModel = NativeNewRollViewModel(userSettings: iOSUserSettings(delegate: UserDefaults.standard))
+    @StateObject var rollHistoryViewModel = NativeRollHistoryViewModel()
     @StateObject var userSettingsViewModel = NativeUserSettingsViewModel(userSettings: iOSUserSettings(delegate: UserDefaults.standard))
     
     var body: some View {
@@ -24,7 +25,7 @@ struct TabNavView: View {
                     
                 })
 
-            RollHistoryView(viewModel: RollHistoryViewModel())
+            RollHistoryView(viewModel: rollHistoryViewModel)
                 .tabItem( {
                     Image(uiImage: SharedRes.images().list_icon.toUIImage()!)
                         .renderingMode(.template)

@@ -10,32 +10,30 @@ import SwiftUI
 import CommonKMM
 
 struct RollHistoryView: View {
-    @State private var viewModel: RollHistoryViewModel
+    @ObservedObject private var viewModel: NativeRollHistoryViewModel
     
-    @State private var viewState: RollHistoryViewState = .Initial.shared
-    
-    init(viewModel: RollHistoryViewModel) {
+    init(viewModel: NativeRollHistoryViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
         NavigationView {
             ZStack {
-                switch onEnum(of: viewState) {
+                switch viewModel.viewState {
                 case .initial:
                     Spacer()
                 case .empty:
                     Spacer()
                     Text(SharedRes.strings().rollHistoryEmptyLabel.desc().localized())
                     Spacer()
-                case.success(let viewContent):
-                    List(viewContent.rolls, id: \.rollTime) { diceRoll in
+                case.success(let rolls):
+                    List(rolls, id: \.rollTime) { diceRoll in
                         Text(diceRoll.equation)
                     }
                 // TODO: this triggers an alert modal
                 case .error(let error):
                     Spacer()
-                    Text(error.error)
+                    Text(error)
                     Spacer()
                     
                 }
@@ -50,7 +48,7 @@ struct RollHistoryView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         Task {
-                            try? await self.viewModel.clearDiceRolls()
+                            await self.viewModel.clearDiceRolls()
                         }
                     }, label: {
                         Label("Clear History", systemImage: "trash")
@@ -62,16 +60,13 @@ struct RollHistoryView: View {
                 // this isn't great, I'm assuming this is what the swift package for KMMViewModel handles
                 await withTaskCancellationHandler(
                     operation: {
-                        Task {
+                        
                             // begins observing updates to the roll history
-                            try? await viewModel.activate()
-                        }
-                        for await viewState in viewModel.viewState {
-                            self.viewState = viewState
-                        }
+                            await viewModel.activate()
+                        
                     },
                     onCancel: {
-                        viewModel.clear()
+                        //viewModel.clear()
                     }
                 )
             }
@@ -81,6 +76,6 @@ struct RollHistoryView: View {
 
 struct RollHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        RollHistoryView(viewModel: RollHistoryViewModel())
+        RollHistoryView(viewModel: NativeRollHistoryViewModel())
     }
 }
